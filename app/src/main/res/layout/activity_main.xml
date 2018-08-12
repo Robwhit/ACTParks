@@ -8,10 +8,18 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
+
+    <!-- This LinearLayout represents the contents of the screen  -->
+
+        <!-- The ActionBar displayed at the top -->
     <include
         layout="@layout/app_bar_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+
+
+
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"

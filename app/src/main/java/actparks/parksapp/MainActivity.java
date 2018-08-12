@@ -1,5 +1,7 @@
 package actparks.parksapp;
 
+import android.app.FragmentManager;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -80,10 +82,12 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        FragmentManager fragmentManager = getFragmentManager();
+
         if (id == R.id.nav_home) {
             // Handle the camera action
         } else if (id == R.id.nav_parks) {
-
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new ParksFragment()).commit();
         } else if (id == R.id.nav_bushwalks) {
 
         } else if (id == R.id.nav_contact) {
@@ -91,6 +95,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_settings) {
 
         }
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
