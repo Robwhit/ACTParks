@@ -1,1 +1,0 @@
-The code of the back-end and the server code is uploaded here
