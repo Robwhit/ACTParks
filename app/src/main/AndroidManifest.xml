@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="actparks.parksapp">
+    <uses-feature android:name="android.hardware.location.gps" />
 
     <application
         android:allowBackup="true"
@@ -20,7 +21,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".ParkActivity" />
-        <activity android:name=".WalksActivity"></activity>
+        <activity android:name=".WalksActivity">
+
+        </activity>
+
     </application>
 
 </manifest>
