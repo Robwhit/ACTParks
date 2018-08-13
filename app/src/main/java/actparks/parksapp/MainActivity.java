@@ -42,6 +42,12 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        // Content of homepage at start
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, new HomeFragment()).commit();
+
     }
 
     @Override
@@ -85,15 +91,15 @@ public class MainActivity extends AppCompatActivity
         FragmentManager fragmentManager = getFragmentManager();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new HomeFragment()).commit();
         } else if (id == R.id.nav_parks) {
             fragmentManager.beginTransaction().replace(R.id.content_frame, new ParksFragment()).commit();
         } else if (id == R.id.nav_bushwalks) {
-
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new WalksFragment()).commit();
         } else if (id == R.id.nav_contact) {
-
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new ContactFragment()).commit();
         } else if (id == R.id.nav_settings) {
-
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new SettingsFragment()).commit();
         }
 
 
