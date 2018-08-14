@@ -23,7 +23,7 @@ public class WalksFragment extends android.app.Fragment {
         walksButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ParkActivity.class);
+                Intent intent = new Intent(getActivity(), WalksActivity.class);
                 startActivity(intent);
             }
         });
