@@ -2,6 +2,7 @@ package actparks.parksapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.RatingBar;
 import android.widget.TabHost;
 
 public class WalksActivity extends AppCompatActivity {
@@ -27,6 +28,11 @@ public class WalksActivity extends AppCompatActivity {
         spec.setContent(R.id.tab2);
         spec.setIndicator("Map");
         host.addTab(spec);
+
+
+        // Difficulty Bar
+        RatingBar ratingWalk = findViewById(R.id.ratingWalk);
+        ratingWalk.setRating(2);
 
     }
 
