@@ -43,8 +43,10 @@ public class ParksFragment extends android.app.Fragment {
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
-                        Intent intent = new Intent(getActivity(), ParkActivity.class);
-                        startActivity(intent);
+                        if(menuItem.getTitle().equals("park1")) {
+                            Intent intent = new Intent(getActivity(), ParkActivity.class);
+                            startActivity(intent);
+                        }
                         return true;
                     }
                 });
