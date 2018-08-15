@@ -14,18 +14,54 @@ public class Walk {
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "id")
-    private int mId;
+    public int mId;
 
     @NonNull
     @ColumnInfo(name = "name")
-    private String mName;
+    public String mName;
 
     @NonNull
     @ColumnInfo(name = "description")
-    private String mDescription;
+    public String mDescription;
 
     @NonNull
     @ColumnInfo(name = "difficulty")
-    private int mDifficulty;
+    public int mDifficulty;
 
+
+    @NonNull
+    public int getmId() {
+        return mId;
+    }
+
+    public void setmId(@NonNull int mId) {
+        this.mId = mId;
+    }
+
+    @NonNull
+    public String getmName() {
+        return mName;
+    }
+
+    public void setmName(@NonNull String mName) {
+        this.mName = mName;
+    }
+
+    @NonNull
+    public String getmDescription() {
+        return mDescription;
+    }
+
+    public void setmDescription(@NonNull String mDescription) {
+        this.mDescription = mDescription;
+    }
+
+    @NonNull
+    public int getmDifficulty() {
+        return mDifficulty;
+    }
+
+    public void setmDifficulty(@NonNull int mDifficulty) {
+        this.mDifficulty = mDifficulty;
+    }
 }
