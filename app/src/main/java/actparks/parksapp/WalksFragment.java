@@ -92,5 +92,4 @@ public class WalksFragment extends Fragment {
 
 
 
-
 }

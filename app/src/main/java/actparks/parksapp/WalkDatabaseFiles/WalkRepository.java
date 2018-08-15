@@ -16,7 +16,7 @@ public class WalkRepository {
     WalkRepository(Application application){
         WalkRoomDatabase db = WalkRoomDatabase.getDatabase(application);
         mWalkDao = db.walkDao();
-        mAllWalks = mWalkDao.getAllWords();
+        mAllWalks = mWalkDao.getAllWalks();
     }
 
     LiveData<List<Walk>> getmAllWalks() {

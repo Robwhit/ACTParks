@@ -20,8 +20,8 @@ public interface WalkDao {
     void deleteAll();
 
 
-    @Query("SELECT * from walk_table ORDER BY name ASC")
-    LiveData<List<Walk>> getAllWords();
+    @Query("SELECT * from walk_table ORDER BY id ASC")
+    LiveData<List<Walk>> getAllWalks();
 
 
 }
