@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 
 public class HomeFragment extends android.app.Fragment {
 
+    // TODO: Adds recommendations
+
     View myView;
 
     @Nullable

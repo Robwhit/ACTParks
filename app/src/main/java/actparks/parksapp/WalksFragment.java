@@ -24,12 +24,17 @@ public class WalksFragment extends android.app.Fragment {
         myView = inflater.inflate(R.layout.fragment_walks, container, false);
         final Context context = getActivity().getApplicationContext();
 
+
+        // TODO: Remove Button and Replace with List of buttons
+
+
         walksButton = (Button) myView.findViewById(R.id.walks_button);
         walksButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Intent intent = new Intent(getActivity(), WalksActivity.class);
                 //startActivity(intent);
+
 
                 PopupMenu popupMenu =new PopupMenu(context, v);
                 final MenuInflater menuInflater = popupMenu.getMenuInflater();
