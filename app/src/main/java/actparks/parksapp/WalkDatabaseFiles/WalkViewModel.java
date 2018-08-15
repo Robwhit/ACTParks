@@ -20,7 +20,7 @@ public class WalkViewModel extends AndroidViewModel{
         mAllWalks = mRepository.getmAllWalks();
     }
 
-    LiveData<List<Walk>> getmAllWalks() { return mAllWalks;}
+    public LiveData<List<Walk>> getmAllWalks() { return mAllWalks;}
 
     public void insert(Walk walk) {mRepository.insert(walk);}
 }

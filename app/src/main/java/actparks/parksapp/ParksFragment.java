@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.PopupMenu;
 
 
-public class ParksFragment extends android.app.Fragment {
+public class ParksFragment extends Fragment {
 
     View myView;
     Button parksButton;

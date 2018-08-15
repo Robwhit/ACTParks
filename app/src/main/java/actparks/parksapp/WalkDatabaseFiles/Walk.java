@@ -11,57 +11,53 @@ import android.support.annotation.NonNull;
 @Entity(tableName = "walk_table")
 public class Walk {
 
+    public Walk(@NonNull int id) {
+        this.mId = id;}
+
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "id")
     public int mId;
 
-    @NonNull
     @ColumnInfo(name = "name")
     public String mName;
 
-    @NonNull
     @ColumnInfo(name = "description")
     public String mDescription;
 
-    @NonNull
     @ColumnInfo(name = "difficulty")
     public int mDifficulty;
 
 
-    @NonNull
     public int getmId() {
         return mId;
     }
 
-    public void setmId(@NonNull int mId) {
+    public void setmId(int mId) {
         this.mId = mId;
     }
 
-    @NonNull
     public String getmName() {
         return mName;
     }
 
-    public void setmName(@NonNull String mName) {
+    public void setmName(String mName) {
         this.mName = mName;
     }
 
-    @NonNull
     public String getmDescription() {
         return mDescription;
     }
 
-    public void setmDescription(@NonNull String mDescription) {
+    public void setmDescription(String mDescription) {
         this.mDescription = mDescription;
     }
 
-    @NonNull
     public int getmDifficulty() {
         return mDifficulty;
     }
 
-    public void setmDifficulty(@NonNull int mDifficulty) {
+    public void setmDifficulty(int mDifficulty) {
         this.mDifficulty = mDifficulty;
     }
 }

@@ -13,4 +13,11 @@
         android:layout_height="wrap_content"
         android:text="Bushwalk" />
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/walksrecyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray"
+        tools:listitem="@layout/walks_recyclerview_item" />
+
 </FrameLayout>
