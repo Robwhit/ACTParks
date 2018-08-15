@@ -7,9 +7,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.PopupMenu;
 
 
 public class ParksFragment extends android.app.Fragment {
@@ -23,15 +27,36 @@ public class ParksFragment extends android.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance){
         myView = inflater.inflate(R.layout.fragment_parks, container, false);
         parksButton = (Button) myView.findViewById(R.id.parks_button);
+        final Context context = getActivity().getApplicationContext();
+
+
+
         parksButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ParkActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(getActivity(), ParkActivity.class);
+                //startActivity(intent);
+                PopupMenu popupMenu =new PopupMenu(context, v);
+                MenuInflater menuInflater = popupMenu.getMenuInflater();
+                menuInflater.inflate(R.menu.parks_name, popupMenu.getMenu());
+
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        Intent intent = new Intent(getActivity(), ParkActivity.class);
+                        startActivity(intent);
+                        return true;
+                    }
+                });
+                popupMenu.show();
             }
         });
+
+
+
         return myView;
 
     }
+
 
 }
