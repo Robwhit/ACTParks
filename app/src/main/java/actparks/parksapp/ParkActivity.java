@@ -2,6 +2,8 @@ package actparks.parksapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TabHost;
 
 public class ParkActivity extends AppCompatActivity {
@@ -28,6 +30,13 @@ public class ParkActivity extends AppCompatActivity {
         spec.setIndicator("Map");
         host.addTab(spec);
 
+        //bushwalks button
+        final Button button = findViewById(R.id.bushwalks_button_id);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Code here executes on main thread after user presses button
+            }
+        });
 
     }
 

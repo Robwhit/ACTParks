@@ -66,8 +66,18 @@
                             android:layout_height="match_parent"
                             android:text="This is tab 2" />
 
+                        <Button
+                            android:id="@+id/bushwalks_button_id"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            android:text="Bushwalks" />
+
                     </LinearLayout>
                 </FrameLayout>
+
+
+
             </LinearLayout>
         </TabHost>
     </ScrollView>
