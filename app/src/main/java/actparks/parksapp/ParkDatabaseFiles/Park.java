@@ -1,21 +1,41 @@
 package actparks.parksapp.ParkDatabaseFiles;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
+import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.Query;
+import android.support.annotation.NonNull;
+
+
+@Entity(tableName = "park_table")
+
 public class Park {
-//    public static final String TAG = Park.class.getSimpleName();
-    public static final String TABLE = "Parks";
 
-    // Labels Table Columns names
-    public static final String KEY_ParkID = "ParkId";
-    public static final String KEY_ParkName = "ParkName";
-    public static final String KEY_MapId = "MapId";
-    public static final String KEY_ParkDescriptoin= "ParkDescription";
-    public static final String KEY_ParkOpeningHours = "ParkOpeningHours";
+    public Park(@NonNull int id) {
+        this.parkId = id;
+    }
 
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "parkId")
     public int parkId;
+
+    @ColumnInfo(name = "name")
     public String parkName;
+
+    @ColumnInfo(name = "mapId")
     public int mapId;
+
+    @ColumnInfo(name = "description")
     public String parkDescription;
+
+    @ColumnInfo(name = "openingHours")
     public String parkOpeningHours;
+
 
     public int getParkId() {
         return parkId;
@@ -29,9 +49,7 @@ public class Park {
         return parkName;
     }
 
-    public void setParkName(String parkName){
-        this.parkName = parkName;
-    }
+    public void setParkName(String parkName) { this.parkName = parkName; }
 
     public int getMapId() {
         return mapId;
@@ -45,17 +63,13 @@ public class Park {
         return parkDescription;
     }
 
-    public void setParkDescription(String parkDescription) {
-        this.parkDescription = parkDescription;
-    }
+    public void setParkDescription(String parkDescription) { this.parkDescription = parkDescription; }
 
     public String getParkOpeningHours() {
         return parkOpeningHours;
     }
 
-    public void setParkOpeningHours(String parkOpeningHours) {
-        this.parkOpeningHours = parkOpeningHours;
-    }
-
-
+    public void setParkOpeningHours(String parkOpeningHours) { this.parkOpeningHours = parkOpeningHours; }
 }
+
+

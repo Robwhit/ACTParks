@@ -75,8 +75,6 @@ public class MainActivity extends AppCompatActivity
 
         // GPS permissions
 
-        insertsSampleParkData();
-
 
     }
 
@@ -118,22 +116,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    //insert sample park data
-    private void insertsSampleParkData(){
-        ParkRepository parkRepo = new ParkRepository();
-
-//        parkRepo.delete();
-
-        Park park = new Park();
-        park.setParkId(1);
-        park.setParkName("park_one");
-        park.setMapId(11);
-        park.setParkDescription("park_one description");
-        park.setParkOpeningHours("8:00-10:00");
-        parkRepo.insert(park);
-
-        System.out.println("inserted one sample data");
-    }
 
 
 }
