@@ -12,14 +12,25 @@ import java.util.List;
 import actparks.parksapp.R;
 
 public class WalkListAdapter extends RecyclerView.Adapter<WalkListAdapter.WalkViewHolder>{
+    private static WalkClickListener clickListener;
 
-    class WalkViewHolder extends RecyclerView.ViewHolder {
+    class WalkViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView walkItemView;
 
         private WalkViewHolder(View itemView){
             super(itemView);
+            itemView.setOnClickListener(this);
             walkItemView = itemView.findViewById(R.id.walks_recycler_text_view);
         }
+
+        @Override
+        public void onClick(View v) {
+            clickListener.onWalkClick(getAdapterPosition(), v);
+        }
+    }
+
+    public void setOnItemClickListener(WalkClickListener clickListener) {
+        WalkListAdapter.clickListener = clickListener;
     }
 
     private final LayoutInflater mInflater;

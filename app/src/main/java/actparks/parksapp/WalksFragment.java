@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,6 +21,7 @@ import android.support.v4.app.Fragment;
 import java.util.List;
 
 import actparks.parksapp.WalkDatabaseFiles.Walk;
+import actparks.parksapp.WalkDatabaseFiles.WalkClickListener;
 import actparks.parksapp.WalkDatabaseFiles.WalkListAdapter;
 import actparks.parksapp.WalkDatabaseFiles.WalkViewModel;
 
@@ -75,7 +77,15 @@ public class WalksFragment extends Fragment {
         // Walks Recycler View
         // Recycler View
         RecyclerView walkrecyclerView = (RecyclerView) myView.findViewById(R.id.walksrecyclerview);
-        final WalkListAdapter adapter = new WalkListAdapter(getActivity());
+        WalkListAdapter adapter = new WalkListAdapter(getActivity());
+        adapter.setOnItemClickListener(new WalkClickListener() {
+            @Override
+            public void onWalkClick(int position, View v) {
+                Intent intent = new Intent(getActivity(), WalksActivity.class);
+                startActivity(intent);
+            }
+        });
+        final WalkListAdapter adapter1 = adapter;
         walkrecyclerView.setAdapter(adapter);
         walkrecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -85,9 +95,10 @@ public class WalksFragment extends Fragment {
             @Override
             public void onChanged(@Nullable final List<Walk> walks) {
                 // Update the cached copy of the words in the adapter.
-                adapter.setWalks(walks);
+                adapter1.setWalks(walks);
             }
         });
+
     }
 
 
