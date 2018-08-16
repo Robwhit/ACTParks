@@ -15,8 +15,8 @@ import android.support.annotation.NonNull;
 
 public class Park {
 
-    public Park(@NonNull int id) {
-        this.parkId = id;
+    public Park(@NonNull int parkId) {
+        this.parkId = parkId;
     }
 
     @PrimaryKey

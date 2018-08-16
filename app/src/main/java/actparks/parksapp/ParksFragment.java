@@ -1,11 +1,15 @@
 package actparks.parksapp;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,11 +19,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.PopupMenu;
 
+import java.util.List;
+
+import actparks.parksapp.ParkDatabaseFiles.Park;
+import actparks.parksapp.ParkDatabaseFiles.ParkListAdapter;
+import actparks.parksapp.ParkDatabaseFiles.ParkViewModel;
+
 
 public class ParksFragment extends Fragment {
 
     View myView;
     Button parksButton;
+    private ParkViewModel mParkViewModel;
 
 
     @Nullable
@@ -59,6 +70,26 @@ public class ParksFragment extends Fragment {
         return myView;
 
     }
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        RecyclerView parkrecyclerView = (RecyclerView) myView.findViewById(R.id.parksrecyclerview);
+        final ParkListAdapter adapter = new ParkListAdapter(getActivity());
+        parkrecyclerView.setAdapter(adapter);
+        parkrecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
+        mParkViewModel = ViewModelProviders.of(this).get(ParkViewModel.class);
+        mParkViewModel.getmAllParks().observe(this, new Observer<List<Park>>() {
+            @Override
+            public void onChanged(@Nullable final List<Park> parks) {
+                // Update the cached copy of the words in the adapter.
+                adapter.setParks(parks);
+            }
+        });
+    }
+
 
 
 }

@@ -19,7 +19,7 @@ public class ParkViewModel extends AndroidViewModel {
         mAllParks = mRepository.getmAllParks();
     }
 
-    public LiveData<List<Park>> getmAllWalks() { return mAllParks;}
+    public LiveData<List<Park>> getmAllParks() { return mAllParks;}
 
     public void insert(Park park) {mRepository.insert(park);}
 }
