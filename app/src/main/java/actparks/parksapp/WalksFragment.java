@@ -19,6 +19,7 @@ import android.widget.PopupMenu;
 import android.support.v4.app.Fragment;
 
 import java.util.List;
+import java.util.Random;
 
 import actparks.parksapp.WalkDatabaseFiles.Walk;
 import actparks.parksapp.WalkDatabaseFiles.WalkClickListener;
@@ -77,11 +78,14 @@ public class WalksFragment extends Fragment {
         // Walks Recycler View
         // Recycler View
         RecyclerView walkrecyclerView = (RecyclerView) myView.findViewById(R.id.walksrecyclerview);
-        WalkListAdapter adapter = new WalkListAdapter(getActivity());
+        final WalkListAdapter adapter = new WalkListAdapter(getActivity());
         adapter.setOnItemClickListener(new WalkClickListener() {
             @Override
             public void onWalkClick(int position, View v) {
+
                 Intent intent = new Intent(getActivity(), WalksActivity.class);
+                //TODO: Make change position
+                intent.putExtra("Id", "Peter");
                 startActivity(intent);
             }
         });

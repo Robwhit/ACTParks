@@ -1,15 +1,21 @@
 package actparks.parksapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.RatingBar;
 import android.widget.TabHost;
+import android.widget.TextView;
 
 public class WalksActivity extends AppCompatActivity {
+
+    TextView title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_walks);
 
@@ -33,6 +39,23 @@ public class WalksActivity extends AppCompatActivity {
         // Difficulty Bar
         RatingBar ratingWalk = findViewById(R.id.ratingWalk);
         ratingWalk.setRating(2);
+
+        // Contents
+
+
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("Id")) {
+            Integer name = intent.getIntExtra("Id", 10);
+            System.out.println(name);
+
+            title = (TextView) findViewById(R.id.walkActivityNameText);
+            title.setText(Integer.toString(name));
+            // TODO: get customer details based on customer id
+        } else {
+            // ...
+        }
+
+
 
     }
 
