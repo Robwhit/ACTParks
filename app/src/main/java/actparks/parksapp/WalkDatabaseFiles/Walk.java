@@ -5,14 +5,19 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
+import java.io.Serializable;
+
 
 // https://codelabs.developers.google.com/codelabs/android-room-with-a-view/#3
 
 @Entity(tableName = "walk_table")
-public class Walk {
+public class Walk implements Serializable{
 
-    public Walk(@NonNull int id) {
-        this.mId = id;}
+    public Walk(@NonNull int id, String name) {
+        this.mId = id;
+        this.mName = name;
+
+    }
 
     @PrimaryKey
     @NonNull

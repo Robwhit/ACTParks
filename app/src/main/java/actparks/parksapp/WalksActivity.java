@@ -7,6 +7,8 @@ import android.widget.RatingBar;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import actparks.parksapp.WalkDatabaseFiles.Walk;
+
 public class WalksActivity extends AppCompatActivity {
 
     TextView title;
@@ -44,13 +46,16 @@ public class WalksActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        if (intent != null && intent.hasExtra("Id")) {
-            Integer name = intent.getIntExtra("Id", 10);
+        if (intent != null && intent.hasExtra("Walk")) {
+            // Gets walk file
+            Walk walk = (Walk) intent.getExtras().getSerializable("Walk");
+            // TODO: get customer details based on customer id
+
+            String name = walk.getmName();
             System.out.println(name);
 
             title = (TextView) findViewById(R.id.walkActivityNameText);
-            title.setText(Integer.toString(name));
-            // TODO: get customer details based on customer id
+            title.setText(name);
         } else {
             // ...
         }

@@ -69,8 +69,14 @@ public class WalkListAdapter extends RecyclerView.Adapter<WalkListAdapter.WalkVi
         else return 0;
     }
 
+    public int getWalkId(int position) {
+        int walk = mWalks.get(position).mId;
+        return walk;
+    }
+
     public Walk getWalk(int position) {
         Walk walk = mWalks.get(position);
         return walk;
     }
+
 }

@@ -54,9 +54,9 @@ public abstract class WalkRoomDatabase extends RoomDatabase{
         @Override
         protected Void doInBackground(final Void... params) {
             mDao.deleteAll();
-            Walk id = new Walk(1);
+            Walk id = new Walk(1, "Robs Walk");
             mDao.insert(id);
-            id = new Walk(2);
+            id = new Walk(2, "Harrys Walk");
             mDao.insert(id);
             return null;
         }
