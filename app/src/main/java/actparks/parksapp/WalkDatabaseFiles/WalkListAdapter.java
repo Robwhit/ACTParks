@@ -48,7 +48,7 @@ public class WalkListAdapter extends RecyclerView.Adapter<WalkListAdapter.WalkVi
     public void onBindViewHolder(WalkViewHolder holder, int position) {
         if (mWalks != null) {
             Walk current = mWalks.get(position);
-            holder.walkItemView.setText(Integer.toString(current.getmId()));
+            holder.walkItemView.setText(current.mName);
         } else {
             // Covers the case of data not being ready yet.
             holder.walkItemView.setText("No Walk");
