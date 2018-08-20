@@ -59,8 +59,9 @@ public class WalksFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), WalksActivity.class);
                 //TODO: Make change position
                 Walk walk = adapter.getWalk(position);
+                String name = adapter.getWalkName(position);
                 intent.putExtra("Walk", walk);
-                System.out.println(walk.mId);
+
                 startActivity(intent);
             }
         });

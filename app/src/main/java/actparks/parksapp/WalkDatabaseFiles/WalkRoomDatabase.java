@@ -24,7 +24,7 @@ public abstract class WalkRoomDatabase extends RoomDatabase{
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             WalkRoomDatabase.class, "walk_database")
                             // TODO: Line below adds test database, remove on final
-                            //.addCallback(sRoomDatabaseCallback)
+                            .addCallback(sRoomDatabaseCallback)
                             .build();
                 }
             }

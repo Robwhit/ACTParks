@@ -48,10 +48,10 @@ public class WalksActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra("Walk")) {
             // Gets walk file
-            Walk walk = (Walk) intent.getExtras().getSerializable("Walk");
+            Walk walk = intent.getParcelableExtra("Walk");
             // TODO: get customer details based on customer id
 
-            String name = walk.getmName();
+            String name = walk.mName;
             System.out.println(name);
 
             title = (TextView) findViewById(R.id.walkActivityNameText);

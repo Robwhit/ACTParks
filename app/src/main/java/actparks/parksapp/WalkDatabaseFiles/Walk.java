@@ -3,21 +3,34 @@ package actparks.parksapp.WalkDatabaseFiles;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
-
-import java.io.Serializable;
 
 
 // https://codelabs.developers.google.com/codelabs/android-room-with-a-view/#3
 
 @Entity(tableName = "walk_table")
-public class Walk implements Serializable{
+public class Walk implements Parcelable{
 
     public Walk(@NonNull int id, String name) {
         this.mId = id;
         this.mName = name;
-
     }
+
+    public Walk(Parcel in){
+        readFromParcel(in);
+    }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public Walk createFromParcel(Parcel in ) {
+            return new Walk( in );
+        }
+
+        public Walk[] newArray(int size) {
+            return new Walk[size];
+        }
+    };
 
     @PrimaryKey
     @NonNull
@@ -64,5 +77,22 @@ public class Walk implements Serializable{
 
     public void setmDifficulty(int mDifficulty) {
         this.mDifficulty = mDifficulty;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(mId);
+        dest.writeString(mName);
+    }
+
+    public void readFromParcel(Parcel in){
+        mId = in.readInt();
+        mName = in.readString();
+
     }
 }

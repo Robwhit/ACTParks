@@ -74,6 +74,11 @@ public class WalkListAdapter extends RecyclerView.Adapter<WalkListAdapter.WalkVi
         return walk;
     }
 
+    public String getWalkName(int position){
+        String walk = mWalks.get(position).mName;
+        return walk;
+    }
+
     public Walk getWalk(int position) {
         Walk walk = mWalks.get(position);
         return walk;
