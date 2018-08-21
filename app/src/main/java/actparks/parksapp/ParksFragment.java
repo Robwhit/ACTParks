@@ -22,6 +22,7 @@ import android.widget.PopupMenu;
 import java.util.List;
 
 import actparks.parksapp.ParkDatabaseFiles.Park;
+import actparks.parksapp.ParkDatabaseFiles.ParkClickListener;
 import actparks.parksapp.ParkDatabaseFiles.ParkListAdapter;
 import actparks.parksapp.ParkDatabaseFiles.ParkViewModel;
 
@@ -40,30 +41,28 @@ public class ParksFragment extends Fragment {
         parksButton = (Button) myView.findViewById(R.id.parks_button);
         final Context context = getActivity().getApplicationContext();
 
-
-
-        parksButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Intent intent = new Intent(getActivity(), ParkActivity.class);
-                //startActivity(intent);
-                PopupMenu popupMenu =new PopupMenu(context, v);
-                MenuInflater menuInflater = popupMenu.getMenuInflater();
-                menuInflater.inflate(R.menu.parks_name, popupMenu.getMenu());
-
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem menuItem) {
-                        if(menuItem.getTitle().equals("park1")) {
-                            Intent intent = new Intent(getActivity(), ParkActivity.class);
-                            startActivity(intent);
-                        }
-                        return true;
-                    }
-                });
-                popupMenu.show();
-            }
-        });
+//        parksButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //Intent intent = new Intent(getActivity(), ParkActivity.class);
+//                //startActivity(intent);
+//                PopupMenu popupMenu =new PopupMenu(context, v);
+//                MenuInflater menuInflater = popupMenu.getMenuInflater();
+//                menuInflater.inflate(R.menu.parks_name, popupMenu.getMenu());
+//
+//                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//                    @Override
+//                    public boolean onMenuItemClick(MenuItem menuItem) {
+//                        if(menuItem.getTitle().equals("park1")) {
+//                            Intent intent = new Intent(getActivity(), ParkActivity.class);
+//                            startActivity(intent);
+//                        }
+//                        return true;
+//                    }
+//                });
+//                popupMenu.show();
+//            }
+//        });
 
 
 
@@ -76,6 +75,17 @@ public class ParksFragment extends Fragment {
 
         RecyclerView parkrecyclerView = (RecyclerView) myView.findViewById(R.id.parksrecyclerview);
         final ParkListAdapter adapter = new ParkListAdapter(getActivity());
+        adapter.setOnItemClickListener(new ParkClickListener() {
+            @Override
+            public void onParkClick(int position, View v) {
+                Intent intent = new Intent(getActivity(), ParkActivity.class);
+                Park park = adapter.getPark(position);
+//                String name = adapter.getParkName(position);
+                intent.putExtra("Park", park);
+                startActivity(intent);
+            }
+        });
+        final ParkListAdapter park_adapter = adapter;
         parkrecyclerView.setAdapter(adapter);
         parkrecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -85,7 +95,7 @@ public class ParksFragment extends Fragment {
             @Override
             public void onChanged(@Nullable final List<Park> parks) {
                 // Update the cached copy of the words in the adapter.
-                adapter.setParks(parks);
+                park_adapter.setParks(parks);
             }
         });
     }

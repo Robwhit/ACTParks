@@ -89,12 +89,10 @@ public class Walk implements Parcelable{
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(mId);
         dest.writeString(mName);
-        dest.writeString(mDescription);
     }
 
     public void readFromParcel(Parcel in){
         mId = in.readInt();
         mName = in.readString();
-        mDescription = in.readString();
     }
 }

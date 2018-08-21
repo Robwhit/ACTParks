@@ -12,13 +12,25 @@ import java.util.List;
 import actparks.parksapp.R;
 
 public class ParkListAdapter extends RecyclerView.Adapter<ParkListAdapter.ParkViewHolder> {
-    class ParkViewHolder extends RecyclerView.ViewHolder {
+    private static ParkClickListener pcl;
+
+    class ParkViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private final TextView parkItemView;
 
         private ParkViewHolder(View itemView){
             super(itemView);
+            itemView.setOnClickListener(this);
             parkItemView = itemView.findViewById(R.id.parks_recycler_text_view);
         }
+
+        @Override
+        public void onClick(View view) {
+            pcl.onParkClick(getAdapterPosition(), view);
+        }
+    }
+
+    public void setOnItemClickListener(ParkClickListener clickListener) {
+        ParkListAdapter.pcl = clickListener;
     }
 
     private final LayoutInflater mInflater;
@@ -55,5 +67,15 @@ public class ParkListAdapter extends RecyclerView.Adapter<ParkListAdapter.ParkVi
         if (mParks != null)
             return mParks.size();
         else return 0;
+    }
+
+    public String getParkName(int position){
+        String park = mParks.get(position).parkName;
+        return park;
+    }
+
+    public Park getPark(int position) {
+        Park park = mParks.get(position);
+        return park;
     }
 }

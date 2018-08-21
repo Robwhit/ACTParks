@@ -20,6 +20,7 @@ public abstract class ParkRoomDatabase extends RoomDatabase{
              if (INSTANCE == null) {
                 INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
              ParkRoomDatabase.class, "park_database")
+                 .addCallback(sRoomDatabaseCallback)
                 .build();
             }
         }
@@ -48,9 +49,9 @@ public abstract class ParkRoomDatabase extends RoomDatabase{
         @Override
         protected Void doInBackground(final Void... params) {
             mDao.deleteAll();
-            Park id = new Park(1);
+            Park id = new Park(1, "my first park");
             mDao.insert(id);
-            id = new Park(2);
+            id = new Park(2, "my second park");
             mDao.insert(id);
             return null;
         }

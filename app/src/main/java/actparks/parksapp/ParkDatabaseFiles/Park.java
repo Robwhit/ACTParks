@@ -8,16 +8,32 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.Query;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
 
 @Entity(tableName = "park_table")
 
-public class Park {
-
-    public Park(@NonNull int parkId) {
+public class Park implements Parcelable {
+    public Park(){}
+    public Park(@NonNull int parkId, String name) {
         this.parkId = parkId;
+        this.parkName = name;
     }
+
+    public Park(Parcel in){
+        readFromParcel(in);
+    }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public Park createFromParcel(Parcel in ) {
+            return new Park( in );
+        }
+        public Park[] newArray(int size) {
+            return new Park[size];
+        }
+    };
 
     @PrimaryKey
     @NonNull
@@ -70,6 +86,20 @@ public class Park {
     }
 
     public void setParkOpeningHours(String parkOpeningHours) { this.parkOpeningHours = parkOpeningHours; }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(parkId);
+        dest.writeString(parkName);
+    }
+    public void readFromParcel(Parcel in){
+        parkId = in.readInt();
+        parkName = in.readString();
+    }
 }
 
 
