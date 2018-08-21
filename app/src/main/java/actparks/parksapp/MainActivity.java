@@ -1,14 +1,18 @@
 package actparks.parksapp;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.RoomDatabase;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -43,6 +47,11 @@ import actparks.parksapp.WalkDatabaseFiles.WalkViewModel;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private int ACCESS_FINE_LOCATION = 1;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +84,11 @@ public class MainActivity extends AppCompatActivity
 
         // GPS permissions
 
+
+        if (ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.ACCESS_FINE_LOCATION )!=
+                PackageManager.PERMISSION_GRANTED){
+            requestStoragePermission();
+        }
 
     }
 
@@ -116,8 +130,24 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+//reference: https://www.youtube.com/watch?v=SMrB97JuIoM
 
+    private void requestStoragePermission(){
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, ACCESS_FINE_LOCATION);
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == ACCESS_FINE_LOCATION){
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(this, "Permission GRAND", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(this, "Permission DENIED", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }
 
 
