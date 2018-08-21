@@ -48,7 +48,8 @@ public class ParkListAdapter extends RecyclerView.Adapter<ParkListAdapter.ParkVi
     public void onBindViewHolder(ParkViewHolder holder, int position) {
         if (mParks != null) {
             Park current = mParks.get(position);
-            holder.parkItemView.setText(Integer.toString(current.getParkId()));
+            holder.parkItemView.setText(current.parkName);
+            //holder.parkItemView.setText(Integer.toString(current.getParkId()));
         } else {
             // Covers the case of data not being ready yet.
             holder.parkItemView.setText("No Park");
