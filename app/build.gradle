@@ -38,6 +38,10 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:$rootProject.archLifecycleVersion"
     annotationProcessor "android.arch.lifecycle:compiler:$rootProject.archLifecycleVersion"
 
-    //
+    // Maps
     compile 'com.google.android.gms:play-services-maps:10.2.0'
+
+    // Two Way View Extension TODO: Put licence
+    // https://github.com/lucasr/twoway-view
+    compile 'org.lucasr.twowayview:twowayview:0.1.4'
 }

@@ -43,6 +43,9 @@ public class Park implements Parcelable {
     @ColumnInfo(name = "name")
     public String parkName;
 
+    @ColumnInfo(name = "tags")
+    public String tags;
+
     @ColumnInfo(name = "mapId")
     public int mapId;
 
@@ -95,10 +98,12 @@ public class Park implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(parkId);
         dest.writeString(parkName);
+
     }
     public void readFromParcel(Parcel in){
         parkId = in.readInt();
         parkName = in.readString();
+
     }
 }
 

@@ -29,6 +29,11 @@
         <item name="android:paddingLeft">8dp</item>
     </style>
 
+    <!-- Two way style extension -->
+    <style name="TwoWayView">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
     <style name="parks_title">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">26dp</item>
