@@ -36,6 +36,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"/>
+
                 <FrameLayout
                     android:id="@android:id/tabcontent"
                     android:layout_width="match_parent"
@@ -54,32 +59,54 @@
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical" >
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
 
                                 <GridView
                                     android:id="@+id/walksGridview"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:numColumns="3"
-                                    android:verticalSpacing="10dp"
-                                    android:horizontalSpacing="10dp"
-                                    android:stretchMode="columnWidth"
                                     android:gravity="center"
-                                    />
+                                    android:horizontalSpacing="10dp"
+                                    android:numColumns="3"
+                                    android:stretchMode="columnWidth"
+                                    android:verticalSpacing="10dp" />
 
-                                <TextView
+                                <View
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:text="This is tab 1" />
+                                    android:layout_height="1dp"
+                                    android:background="@android:color/darker_gray" />
 
-                                <RatingBar
-                                    android:id="@+id/ratingWalk"
-                                    android:layout_width="match_parent"
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:isIndicator="true"
-                                    android:numStars="5"
-                                    android:stepSize="0.1" />
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:text="Difficulty: "
+                                        android:textSize="30dp"/>
+
+                                    <RatingBar
+                                        android:id="@+id/ratingWalk"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:isIndicator="true"
+                                        android:numStars="5"
+                                        android:layout_gravity="right"
+                                        style="?android:attr/ratingBarStyleIndicator"
+
+                                        />
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@android:color/darker_gray"/>
+
+
+
 
                             </LinearLayout>
                         </ScrollView>

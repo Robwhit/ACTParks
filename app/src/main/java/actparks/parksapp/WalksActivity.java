@@ -9,8 +9,6 @@ import android.widget.RatingBar;
 import android.widget.TabHost;
 import android.widget.TextView;
 
-import org.lucasr.twowayview.TwoWayView;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -59,20 +57,23 @@ public class WalksActivity extends AppCompatActivity {
             Walk walk = intent.getParcelableExtra("Walk");
             // TODO: get customer details based on customer id
 
+            // Title
             String name = walk.mName;
-            System.out.println(name);
-
             title = (TextView) findViewById(R.id.walkActivityNameText);
             title.setText(name);
 
+            // Tags
             String[] tagArray = ArrayHelpers.convertStringToArray(walk.tags);
-            ArrayList<String> tagArrayList = new ArrayList<>();
-            Collections.addAll(tagArrayList, tagArray);
-            ArrayAdapter<String> aItems = new ArrayAdapter<String>(this, R.layout.simple_list_item_walk_tags, tagArrayList);
+            ArrayAdapter<String> aItems = new ArrayAdapter<String>(this, R.layout.simple_list_item_walk_tags, tagArray);
             GridView lvTest = (GridView) findViewById(R.id.walksGridview);
-            if (tagArrayList.size() == 0){
+            if (tagArray.length == 0){
                 lvTest.setMinimumHeight(0);
             }
+
+            // Difficulty
+            RatingBar difficulty = (RatingBar) findViewById(R.id.ratingWalk);
+            difficulty.setRating(walk.mDifficulty);
+
 
 
             lvTest.setAdapter(aItems);

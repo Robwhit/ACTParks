@@ -13,10 +13,11 @@ import android.support.annotation.NonNull;
 @Entity(tableName = "walk_table")
 public class Walk implements Parcelable{
 
-    public Walk(@NonNull int id, String name, String tags) {
+    public Walk(@NonNull int id, String name, String tags, int difficulty) {
         this.mId = id;
         this.mName = name;
         this.tags = tags;
+        this.mDifficulty = difficulty;
     }
 
     public Walk(Parcel in){
@@ -45,47 +46,12 @@ public class Walk implements Parcelable{
     public String tags;
 
 
-
-
-
     @ColumnInfo(name = "description")
     public String mDescription;
 
     @ColumnInfo(name = "difficulty")
     public int mDifficulty;
 
-
-    public int getmId() {
-        return mId;
-    }
-
-    public void setmId(int mId) {
-        this.mId = mId;
-    }
-
-    public String getmName() {
-        return mName;
-    }
-
-    public void setmName(String mName) {
-        this.mName = mName;
-    }
-
-    public String getmDescription() {
-        return mDescription;
-    }
-
-    public void setmDescription(String mDescription) {
-        this.mDescription = mDescription;
-    }
-
-    public int getmDifficulty() {
-        return mDifficulty;
-    }
-
-    public void setmDifficulty(int mDifficulty) {
-        this.mDifficulty = mDifficulty;
-    }
 
     @Override
     public int describeContents() {
@@ -97,11 +63,13 @@ public class Walk implements Parcelable{
         dest.writeInt(mId);
         dest.writeString(mName);
         dest.writeString(tags);
+        dest.writeInt(mDifficulty);
     }
 
     public void readFromParcel(Parcel in){
         mId = in.readInt();
         mName = in.readString();
         tags = in.readString();
+        mDifficulty = in.readInt();
     }
 }
