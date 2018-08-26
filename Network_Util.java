@@ -12,7 +12,7 @@ public class Network_Util {
     }
 
     public String connres(DataOutputStream out, DataInputStream in) throws IOException {
-        // create 100KB payload
+        // create 20KB payload
         String payload = String.format("%020480d",1);
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         String ts = (String.format("%64s", Long.toBinaryString(timestamp.getTime()))).replace(" ", "0");
