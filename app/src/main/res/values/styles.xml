@@ -29,6 +29,10 @@
         <item name="android:paddingLeft">8dp</item>
     </style>
 
+    <style name="walks_distance">
+
+    </style>
+
     <!-- Two way style extension -->
     <style name="TwoWayView">
         <item name="android:orientation">horizontal</item>

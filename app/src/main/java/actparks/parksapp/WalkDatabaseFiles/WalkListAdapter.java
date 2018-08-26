@@ -15,12 +15,14 @@ public class WalkListAdapter extends RecyclerView.Adapter<WalkListAdapter.WalkVi
     private static WalkClickListener clickListener;
 
     class WalkViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private final TextView walkItemView;
+        private final TextView walkTitleView;
+        private final TextView walkDistanceView;
 
         private WalkViewHolder(View itemView){
             super(itemView);
             itemView.setOnClickListener(this);
-            walkItemView = itemView.findViewById(R.id.walks_recycler_text_view);
+            walkTitleView = itemView.findViewById(R.id.walks_recycler_title_view);
+            walkDistanceView = itemView.findViewById(R.id.walks_recycler_distance_view);
         }
 
         @Override
@@ -44,14 +46,18 @@ public class WalkListAdapter extends RecyclerView.Adapter<WalkListAdapter.WalkVi
         return new WalkViewHolder(itemView);
     }
 
+
+    // TODO: Change buttons on list
     @Override
     public void onBindViewHolder(WalkViewHolder holder, int position) {
         if (mWalks != null) {
             Walk current = mWalks.get(position);
-            holder.walkItemView.setText(current.mName);
+            holder.walkTitleView.setText(current.mName);
+            holder.walkDistanceView.setText(current.mDistance+"km");
+
         } else {
             // Covers the case of data not being ready yet.
-            holder.walkItemView.setText("No Walk");
+            // Nothing in Data
         }
     }
 
