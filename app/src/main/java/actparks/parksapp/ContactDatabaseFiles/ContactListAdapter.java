@@ -16,10 +16,12 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
 
     class ContactViewHolder extends RecyclerView.ViewHolder{
         private final TextView contactItemView;
+        private final TextView contactNumberView;
 
         private ContactViewHolder(View itemView){
             super(itemView);
             contactItemView = itemView.findViewById( R.id.contacts_recycler_text_view);
+            contactNumberView = itemView.findViewById( R.id.contacts_recycler_number_view );
         }
 
     }
@@ -40,7 +42,8 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     public void onBindViewHolder(ContactViewHolder holder, int position) {
         if (mContacts != null) {
             Contact current = mContacts.get(position);
-            holder.contactItemView.setText(current.contactName+": "+current.contactNumber);
+            holder.contactItemView.setText("Name: " + current.contactName);
+            holder.contactNumberView.setText( "Number: " + current.contactNumber );
             //holder.contactItemView.setText(current.contactNumber);
         } else {
             // Covers the case of data not being ready yet.
