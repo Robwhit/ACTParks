@@ -1,16 +1,27 @@
 package actparks.parksapp;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TabHost;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 
 import actparks.parksapp.Helpers.ArrayHelpers;
 import actparks.parksapp.WalkDatabaseFiles.Walk;
@@ -18,6 +29,8 @@ import actparks.parksapp.WalkDatabaseFiles.Walk;
 public class WalksActivity extends AppCompatActivity {
 
     TextView title;
+    ImageView imageView;
+    private String STATIC_MAP_API_ENDPOINT = "https://maps.googleapis.com/maps/api/staticmap?autoscale=2&size=640x640&maptype=roadmap&key=AIzaSyB2txl4s1yCTel2L91gkBAQgERRZFcHGvQ&format=png&visual_refresh=true&markers=size:small%7Ccolor:0x1231ff%7Clabel:1%7C-35.27528435,149.12052184576413&markers=size:small%7Ccolor:0x1925ff%7Clabel:1%7C-35.27804185,149.12042495";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +101,42 @@ public class WalksActivity extends AppCompatActivity {
             // ...
         }
 
+        //reference https://www.journaldev.com/10392/google-static-maps-android
+
+        imageView = (ImageView)findViewById(R.id.walkImageView);
+
+            AsyncTask<Void, Void, Bitmap> setImageFromUrl = new AsyncTask<Void, Void, Bitmap>(){
+                @Override
+                protected Bitmap doInBackground(Void... params) {
+                    Bitmap bmp = null;
+                    HttpClient httpclient = new DefaultHttpClient();
+                    HttpGet request = new HttpGet(STATIC_MAP_API_ENDPOINT);
+
+                    InputStream in = null;
+                    try {
+                        HttpResponse response = httpclient.execute(request);
+                        in = response.getEntity().getContent();
+                        bmp = BitmapFactory.decodeStream(in);
+                        in.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return bmp;
+                }
+                protected void onPostExecute(Bitmap bmp) {
+                    if (bmp!=null) {
+
+                        imageView.setImageBitmap(bmp);
+
+                    }
+
+                }
+            };
+
+            setImageFromUrl.execute();
+
+
+
 
 
     }
@@ -97,5 +146,6 @@ public class WalksActivity extends AppCompatActivity {
         finish();
         return true;
     }
+
 
 }
