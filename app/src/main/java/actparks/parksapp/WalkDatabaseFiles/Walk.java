@@ -14,7 +14,7 @@ import android.support.annotation.NonNull;
 public class Walk implements Parcelable{
 
     public Walk(@NonNull int id, String name, String tags, int difficulty,
-                String distance, String lengthTime) {
+                double distance, String lengthTime) {
         this.mId = id;
         this.mName = name;
         this.tags = tags;
@@ -48,10 +48,10 @@ public class Walk implements Parcelable{
     @ColumnInfo(name = "tags")
     public String tags;
 
-    @ColumnInfo(name = "Distance")
-    public String mDistance;
+    @ColumnInfo(name = "distance")
+    public double mDistance;
 
-    @ColumnInfo(name = "LengthTime")
+    @ColumnInfo(name = "dengthTime")
     public String mLengthTime;
 
     @ColumnInfo(name = "description")
@@ -75,7 +75,7 @@ public class Walk implements Parcelable{
         dest.writeString(mName);
         dest.writeString(tags);
         dest.writeInt(mDifficulty);
-        dest.writeString(mDistance);
+        dest.writeDouble(mDistance);
         dest.writeString(mLengthTime);
     }
 
@@ -84,7 +84,7 @@ public class Walk implements Parcelable{
         mName = in.readString();
         tags = in.readString();
         mDifficulty = in.readInt();
-        mDistance = in.readString();
+        mDistance = in.readDouble();
         mLengthTime = in.readString();
     }
 }

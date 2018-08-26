@@ -55,10 +55,10 @@ public abstract class WalkRoomDatabase extends RoomDatabase{
         protected Void doInBackground(final Void... params) {
             mDao.deleteAll();
             Walk id = new Walk(1, "Robs Walk", "Long Walk__,__Hard Difficulty__,__Long Walk__,__Hard Difficulty__,__Long Walk",
-                    4, "5.00","1:05");
+                    4, 5.00,"1:05");
             mDao.insert(id);
             id = new Walk(2, "Harrys Walk","Short Walk__,__Easy Difficulty",
-                    2, "2.75","0:42");
+                    2, 2.75,"0:42");
             mDao.insert(id);
             return null;
         }
