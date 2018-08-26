@@ -74,6 +74,13 @@ public class WalksActivity extends AppCompatActivity {
             RatingBar difficulty = (RatingBar) findViewById(R.id.ratingWalk);
             difficulty.setRating(walk.mDifficulty);
 
+            // Distance
+            TextView distance = (TextView) findViewById(R.id.textWalkDistance);
+            distance.setText(walk.mDistance +"km");
+
+            // Time
+            TextView time = (TextView) findViewById(R.id.textWalkTime);
+            time.setText(walk.mLengthTime +"km");
 
 
             lvTest.setAdapter(aItems);

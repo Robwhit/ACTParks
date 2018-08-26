@@ -13,11 +13,14 @@ import android.support.annotation.NonNull;
 @Entity(tableName = "walk_table")
 public class Walk implements Parcelable{
 
-    public Walk(@NonNull int id, String name, String tags, int difficulty) {
+    public Walk(@NonNull int id, String name, String tags, int difficulty,
+                String distance, String lengthTime) {
         this.mId = id;
         this.mName = name;
         this.tags = tags;
         this.mDifficulty = difficulty;
+        this.mDistance = distance;
+        this.mLengthTime = lengthTime;
     }
 
     public Walk(Parcel in){
@@ -45,6 +48,11 @@ public class Walk implements Parcelable{
     @ColumnInfo(name = "tags")
     public String tags;
 
+    @ColumnInfo(name = "Distance")
+    public String mDistance;
+
+    @ColumnInfo(name = "LengthTime")
+    public String mLengthTime;
 
     @ColumnInfo(name = "description")
     public String mDescription;
@@ -64,6 +72,8 @@ public class Walk implements Parcelable{
         dest.writeString(mName);
         dest.writeString(tags);
         dest.writeInt(mDifficulty);
+        dest.writeString(mDistance);
+        dest.writeString(mLengthTime);
     }
 
     public void readFromParcel(Parcel in){
@@ -71,5 +81,7 @@ public class Walk implements Parcelable{
         mName = in.readString();
         tags = in.readString();
         mDifficulty = in.readInt();
+        mDistance = in.readString();
+        mLengthTime = in.readString();
     }
 }

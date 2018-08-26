@@ -25,11 +25,10 @@
                     android:id="@+id/walkActivityNameText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Walk Name"
                     tools:layout_editor_absoluteX="73dp"
                     tools:layout_editor_absoluteY="0dp"
                     android:gravity="center"
-                    android:textSize="30dp"/>
+                    android:textSize="30sp"/>
 
                 <TabWidget
                     android:id="@android:id/tabs"
@@ -86,7 +85,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="match_parent"
                                         android:text="Difficulty: "
-                                        android:textSize="30dp"/>
+                                        android:textSize="30sp"/>
 
                                     <RatingBar
                                         android:id="@+id/ratingWalk"
@@ -105,7 +104,28 @@
                                     android:layout_height="1dp"
                                     android:background="@android:color/darker_gray"/>
 
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
 
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.5"
+                                        android:id="@+id/textWalkDistance"
+                                        android:textSize="30sp"
+                                        android:textAlignment="center"/>
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.5"
+                                        android:id="@+id/textWalkTime"
+                                        android:textSize="30sp"
+                                        android:textAlignment="center"/>
+
+                                </LinearLayout>
 
 
                             </LinearLayout>
