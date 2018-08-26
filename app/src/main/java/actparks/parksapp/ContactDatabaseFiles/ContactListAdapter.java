@@ -42,11 +42,11 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     public void onBindViewHolder(ContactViewHolder holder, int position) {
         if (mContacts != null) {
             Contact current = mContacts.get(position);
-            holder.contactItemView.setText("Name: " + current.contactName);
+            holder.contactItemView.setText(current.contactName);
             String number = current.contactNumber;
             number = String.format("%s %s %s %s", number.substring(0, 3), number.substring(3, 6),
                     number.substring(6, 9), number.substring(9, 12));
-            holder.contactNumberView.setText( "Number: " + number );
+            holder.contactNumberView.setText(number );
             //holder.contactItemView.setText(current.contactNumber);
         } else {
             // Covers the case of data not being ready yet.

@@ -39,5 +39,5 @@ public interface WalkDao {
     @Query("SELECT * FROM walk_table WHERE name LIKE :search")
     LiveData<List<Walk>> searchWalkName(String search);
 
-    
+
 }
