@@ -60,6 +60,9 @@ public class Walk implements Parcelable{
     @ColumnInfo(name = "difficulty")
     public int mDifficulty;
 
+    @ColumnInfo(name = "coordinate")
+    public String mCoordinate;
+
 
     @Override
     public int describeContents() {
