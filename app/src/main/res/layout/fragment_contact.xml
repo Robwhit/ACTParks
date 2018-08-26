@@ -11,4 +11,11 @@
         android:layout_height="match_parent"
         android:text="Contact" />
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/contactsrecyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray"
+        tools:listitem="@layout/contacts_recyclerview_item" />
+
 </FrameLayout>
