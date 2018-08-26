@@ -43,7 +43,10 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         if (mContacts != null) {
             Contact current = mContacts.get(position);
             holder.contactItemView.setText("Name: " + current.contactName);
-            holder.contactNumberView.setText( "Number: " + current.contactNumber );
+            String number = current.contactNumber;
+            number = String.format("%s %s %s %s", number.substring(0, 3), number.substring(3, 6),
+                    number.substring(6, 9), number.substring(9, 12));
+            holder.contactNumberView.setText( "Number: " + number );
             //holder.contactItemView.setText(current.contactNumber);
         } else {
             // Covers the case of data not being ready yet.
