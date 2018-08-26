@@ -80,7 +80,7 @@ public class WalksActivity extends AppCompatActivity {
 
             // Time
             TextView time = (TextView) findViewById(R.id.textWalkTime);
-            time.setText(walk.mLengthTime +"km");
+            time.setText(walk.mLengthTime +"hrs");
 
 
             lvTest.setAdapter(aItems);
