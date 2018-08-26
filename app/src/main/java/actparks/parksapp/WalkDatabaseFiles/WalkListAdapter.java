@@ -52,6 +52,7 @@ public class WalkListAdapter extends RecyclerView.Adapter<WalkListAdapter.WalkVi
     public void onBindViewHolder(WalkViewHolder holder, int position) {
         if (mWalks != null) {
             Walk current = mWalks.get(position);
+
             holder.walkTitleView.setText(current.mName);
             holder.walkDistanceView.setText(current.mDistance+"km");
 
