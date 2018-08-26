@@ -49,9 +49,9 @@ public abstract class ContactRoomDatabase extends RoomDatabase{
         @Override
         protected Void doInBackground(final Void... params) {
             mDao.deleteAll();
-            Contact contact = new Contact(1, "Lucy", "+06000000");
+            Contact contact = new Contact(1, "Lucy", "+61426111000");
             mDao.insert(contact);
-            contact = new Contact(2, "Zoe", "+12300000");
+            contact = new Contact(2, "Zoe", "+61111333000");
             mDao.insert(contact);
             return null;
         }
