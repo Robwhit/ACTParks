@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.PopupMenu;
 import android.support.v4.app.Fragment;
+import android.widget.Toast;
 
 import java.util.List;
 import java.util.Random;
@@ -32,6 +33,7 @@ public class WalksFragment extends Fragment {
     View myView;
     Button walksButton;
     private WalkViewModel mWalkViewModel;
+    Button button_filter;
 
     @Nullable
     @Override
@@ -78,6 +80,34 @@ public class WalksFragment extends Fragment {
                 adapter1.setWalks(walks);
             }
         });
+
+        //Filter
+        button_filter = (Button) myView.findViewById(R.id.walks_filter_button);
+        button_filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Creating the instance of PopupMenu
+                PopupMenu popup = new PopupMenu(getContext(), button_filter);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater()
+                        .inflate(R.menu.filter_walks, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        Toast.makeText(
+                                getContext(),
+                                "You Clicked : " + item.getTitle(),
+                                Toast.LENGTH_SHORT
+                        ).show();
+                        return true;
+                    }
+                });
+
+                popup.show(); //showing popup menu
+            }
+        }); //closing the setOnClickListener method
+
 
     }
 
