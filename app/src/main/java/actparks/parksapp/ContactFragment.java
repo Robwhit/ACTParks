@@ -38,7 +38,6 @@ public class ContactFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        System.out.println("123333333");
         RecyclerView contactrecyclerView = (RecyclerView) myView.findViewById(R.id.contactsrecyclerview);
         final ContactListAdapter adapter = new ContactListAdapter(getActivity());
 
@@ -59,21 +58,6 @@ public class ContactFragment extends Fragment {
                 {
                     e.getMessage();
                 }
-
-//                if (contactLink != "") {
-//                    Intent browserIntent = new Intent(
-//                            Intent.ACTION_VIEW,
-//                            Uri.parse( contactLink) );
-//                    startActivity( browserIntent );
-//                }else{
-//                    System.out.println("no input contact link!");
-//                }
-//                Intent intent = new Intent(getActivity(), ParkActivity.class);
-//                Contact contact = adapter.getContact(position);
-//                String name = adapter.getParkName(position);
-//                intent.putExtra("Contact", contact);
-//                startActivity(intent);
-
             }
         });
         final ContactListAdapter contact_adapter = adapter;
