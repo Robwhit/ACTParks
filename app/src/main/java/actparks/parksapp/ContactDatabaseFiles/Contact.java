@@ -9,10 +9,11 @@ import android.support.annotation.NonNull;
 @Entity(tableName = "contact_table")
 public class Contact implements Parcelable{
 
-    public Contact(@NonNull int contactId, String contactName, String contactNumber){
+    public Contact(@NonNull int contactId, String contactName, String contactNumber, String contactLink){
         this.contactId = contactId;
         this.contactName = contactName;
         this.contactNumber = contactNumber;
+        this.contactLink = contactLink;
     }
     public Contact(Parcel in){
         readFromParcel(in);

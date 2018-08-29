@@ -12,18 +12,27 @@ import java.util.List;
 import actparks.parksapp.R;
 
 public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.ContactViewHolder> {
+    private static ContactClickListener ccl;
 
-
-    class ContactViewHolder extends RecyclerView.ViewHolder{
+    class ContactViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private final TextView contactItemView;
         private final TextView contactNumberView;
 
         private ContactViewHolder(View itemView){
             super(itemView);
+            itemView.setOnClickListener(this);
             contactItemView = itemView.findViewById( R.id.contacts_recycler_text_view);
             contactNumberView = itemView.findViewById( R.id.contacts_recycler_number_view );
         }
 
+        @Override
+        public void onClick(View view) {
+            ccl.onContactClick(getAdapterPosition(), view);
+        }
+    }
+
+    public void setOnItemClickListener(ContactClickListener clickListener) {
+        ContactListAdapter.ccl = clickListener;
     }
 
 
@@ -76,5 +85,10 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     public Contact getContact(int position) {
         Contact contact = mContacts.get(position);
         return contact;
+    }
+
+    public  String getContactLink(int position){
+        String contactLink = mContacts.get(position).contactLink;
+        return contactLink;
     }
 }
