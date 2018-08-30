@@ -136,6 +136,7 @@ public class WalksActivity extends AppCompatActivity {
         //get GPS location
 
         //reference: https://www.youtube.com/watch?v=kz4wigGXilI
+        //reference: https://www.journaldev.com/10392/google-static-maps-android
 
         imageView = (ImageView) findViewById(R.id.walkImageView);
 
