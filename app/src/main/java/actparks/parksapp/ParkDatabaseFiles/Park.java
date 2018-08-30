@@ -55,55 +55,20 @@ public class Park implements Parcelable {
     @ColumnInfo(name = "openingHours")
     public String parkOpeningHours;
 
-
-    public int getParkId() {
-        return parkId;
-    }
-
-    public void setParkId(int parkId) {
-        this.parkId = parkId;
-    }
-
-    public String getParkName() {
-        return parkName;
-    }
-
-    public void setParkName(String parkName) { this.parkName = parkName; }
-
-    public int getMapId() {
-        return mapId;
-    }
-
-    public void setMapId(int mapId) {
-        this.mapId = mapId;
-    }
-
-    public String getParkDescription() {
-        return parkDescription;
-    }
-
-    public void setParkDescription(String parkDescription) { this.parkDescription = parkDescription; }
-
-    public String getParkOpeningHours() {
-        return parkOpeningHours;
-    }
-
-    public void setParkOpeningHours(String parkOpeningHours) { this.parkOpeningHours = parkOpeningHours; }
-
     @Override
     public int describeContents() {
         return 0;
     }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(parkId);
         dest.writeString(parkName);
-
     }
+
     public void readFromParcel(Parcel in){
         parkId = in.readInt();
         parkName = in.readString();
-
     }
 }
 

@@ -42,40 +42,6 @@ public class Contact implements Parcelable{
     @ColumnInfo(name = "contactLink")
     public String contactLink;
 
-
-    @NonNull
-    public int getContactId() {
-        return contactId;
-    }
-
-    public String getContactName() {
-        return contactName;
-    }
-
-    public String getContactNumber() {
-        return contactNumber;
-    }
-
-    public String getContactLink() {
-        return contactLink;
-    }
-
-    public void setContactId(@NonNull int contactId) {
-        this.contactId = contactId;
-    }
-
-    public void setContactName(String contactName) {
-        this.contactName = contactName;
-    }
-
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
-    }
-
-    public void setContactLink(String contactLink) {
-        this.contactLink = contactLink;
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -86,12 +52,12 @@ public class Contact implements Parcelable{
         dest.writeInt(contactId);
         dest.writeString(contactName);
         dest.writeString(contactNumber);
-
+        dest.writeString( contactLink );
     }
     public void readFromParcel(Parcel in){
         contactId = in.readInt();
         contactName = in.readString();
         contactNumber = in.readString();
-
+        contactLink = in.readString();
     }
 }
