@@ -53,7 +53,7 @@ public class WalksActivity extends AppCompatActivity {
 
     TextView title;
     ImageView imageView;
-    private String STATIC_MAP_API_ENDPOINT = "https://maps.googleapis.com/maps/api/staticmap?center=&zoom=0&scale=2&size=640x640&maptype=roadmap&key=AIzaSyB2txl4s1yCTel2L91gkBAQgERRZFcHGvQ&format=png&visual_refresh=true";
+    private String STATIC_MAP_API_ENDPOINT = "https://maps.googleapis.com/maps/api/staticmap?center=canberra&zoom=4&scale=2&size=640x640&maptype=roadmap&key=AIzaSyB2txl4s1yCTel2L91gkBAQgERRZFcHGvQ&format=png&visual_refresh=true";
 
     private int ACCESS_FINE_LOCATION = 1;
 
