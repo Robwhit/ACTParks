@@ -95,6 +95,10 @@ public class WalksActivity extends AppCompatActivity {
             TextView time = (TextView) findViewById(R.id.textWalkTime);
             time.setText(walk.mLengthTime +"hrs");
 
+            // Description
+            TextView description = (TextView) findViewById( R.id.walkActivityDescriptionText );
+            description.setText( walk.mDescription );
+
 
             lvTest.setAdapter(aItems);
         } else {
