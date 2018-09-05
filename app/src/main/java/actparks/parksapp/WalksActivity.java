@@ -23,6 +23,13 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TabHost;
 import android.widget.TextView;
+import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.MarkerOptions;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.maps.MapView;
+import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -34,6 +41,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.maps.MapView;
 
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -53,12 +62,10 @@ public class WalksActivity extends AppCompatActivity {
 
     TextView title;
     ImageView imageView;
-    private String STATIC_MAP_API_ENDPOINT = "https://maps.googleapis.com/maps/api/staticmap?center=canberra&zoom=4&scale=2&size=640x640&maptype=roadmap&key=AIzaSyB2txl4s1yCTel2L91gkBAQgERRZFcHGvQ&format=png&visual_refresh=true";
+    private MapView mapView;
 
-    private int ACCESS_FINE_LOCATION = 1;
 
-    private LocationManager locationManager;
-    private LocationListener locationListener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,116 +140,55 @@ public class WalksActivity extends AppCompatActivity {
             // ...
         }
 
-        //get GPS location
-
-        //reference: https://www.youtube.com/watch?v=kz4wigGXilI
-        //reference: https://www.journaldev.com/10392/google-static-maps-android
-
-        imageView = (ImageView) findViewById(R.id.walkImageView);
-
-        locationManager = (LocationManager) this.getSystemService(LOCATION_SERVICE);
-        locationListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                String latitude = Double.toString(location.getLatitude());
-                String longitude = Double.toString(location.getLongitude());
-
-                try {
-                    String marker1 = "color:orange|label:1|";
-                    marker1 = URLEncoder.encode(marker1, "UTF-8");
-                    marker1 = marker1 + latitude+","+longitude;
-
-                    Log.d("the current latitude", latitude);
-                    Log.d("the currnet longitude", longitude);
-
-
-
-                    //STATIC_MAP_API_ENDPOINT = STATIC_MAP_API_ENDPOINT + path + "&markers=" + marker_me + "&markers=" + marker_dest;
-                    STATIC_MAP_API_ENDPOINT = STATIC_MAP_API_ENDPOINT + "&markers=" + marker1;
-
-                    AsyncTask<Void, Void, Bitmap> setImageFromUrl = new AsyncTask<Void, Void, Bitmap>() {
-                        @Override
-                        protected Bitmap doInBackground(Void... params) {
-                            Bitmap bmp = null;
-                            HttpClient httpclient = new DefaultHttpClient();
-                            HttpGet request = new HttpGet(STATIC_MAP_API_ENDPOINT);
-
-                            InputStream in = null;
-                            try {
-                                HttpResponse response = httpclient.execute(request);
-                                in = response.getEntity().getContent();
-                                bmp = BitmapFactory.decodeStream(in);
-                                in.close();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            return bmp;
-                        }
-
-                        protected void onPostExecute(Bitmap bmp) {
-                            if (bmp != null) {
-
-                                imageView.setImageBitmap(bmp);
-
-                            }
-
-                        }
-                    };
-
-                    setImageFromUrl.execute();
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-            @Override
-            public void onStatusChanged(String s, int i, Bundle bundle) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String s) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String s) {
-
-            }
-        };
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-        } else {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-        }
+        // MapBox
+        Mapbox.getInstance(this, getString(R.string.access_token));
+        mapView = (MapView) findViewById(R.id.mapWalkView);
+        mapView.onCreate(savedInstanceState);
 
     }
 
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-            if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)==
-                    PackageManager.PERMISSION_GRANTED){
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-            }
-        }
+    public void onStart() {
+        super.onStart();
+        mapView.onStart();
     }
 
     @Override
-    public boolean onSupportNavigateUp() {
-        finish();
-        return true;
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
+
+
 }

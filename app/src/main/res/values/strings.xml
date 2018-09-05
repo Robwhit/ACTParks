@@ -9,4 +9,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- TODO: Tempory Mapbox Token - Rob -->
+    <string name="access_token">pk.eyJ1IjoicmFzcGJlcnJ5YXBwbGVzIiwiYSI6ImNqbHBhNzN1YzIybDAzcW9zcjNhdmQyeTEifQ.jMeE6Y7Zz_lD2IghsumWDw</string>
 </resources>
