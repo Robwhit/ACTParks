@@ -41,8 +41,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.maps.MapView;
 
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -92,9 +90,6 @@ public class WalksActivity extends AppCompatActivity {
         host.addTab(spec);
 
 
-        // Difficulty Bar
-        RatingBar ratingWalk = findViewById(R.id.ratingWalk);
-        ratingWalk.setRating(2);
 
         // Contents
 
@@ -134,16 +129,19 @@ public class WalksActivity extends AppCompatActivity {
             TextView description = (TextView) findViewById(R.id.walkActivityDescriptionText);
             description.setText(walk.mDescription);
 
-
             lvTest.setAdapter(aItems);
+
+            // MapBox
+            Mapbox.getInstance(this, getString(R.string.access_token));
+            mapView = (MapView) findViewById(R.id.mapWalkView);
+            mapView.onCreate(savedInstanceState);
+
         } else {
             // ...
         }
 
-        // MapBox
-        Mapbox.getInstance(this, getString(R.string.access_token));
-        mapView = (MapView) findViewById(R.id.mapWalkView);
-        mapView.onCreate(savedInstanceState);
+
+
 
     }
 
@@ -188,6 +186,13 @@ public class WalksActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
+    }
+
+    // Back button
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 
 
