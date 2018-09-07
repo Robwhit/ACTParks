@@ -69,13 +69,15 @@ public class WalksActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        Mapbox.getInstance(this, getString(R.string.access_token));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         setContentView(R.layout.activity_walks);
 
         // Create Tabs
         TabHost host = (TabHost) findViewById(R.id.tabHostParks);
         host.setup();
+
 
         //Tab 1
         TabHost.TabSpec spec = host.newTabSpec("Information");
@@ -87,6 +89,12 @@ public class WalksActivity extends AppCompatActivity {
         spec = host.newTabSpec("Map");
         spec.setContent(R.id.tab2);
         spec.setIndicator("Map");
+        spec.setContent(new TabHost.TabContentFactory() {
+            @Override
+            public View createTabContent(String s) {
+                return mapView;
+            }
+        });
         host.addTab(spec);
 
 
@@ -132,9 +140,17 @@ public class WalksActivity extends AppCompatActivity {
             lvTest.setAdapter(aItems);
 
             // MapBox
-            Mapbox.getInstance(this, getString(R.string.access_token));
+
             mapView = (MapView) findViewById(R.id.mapWalkView);
             mapView.onCreate(savedInstanceState);
+            mapView.getMapAsync(new OnMapReadyCallback() {
+                @Override
+                public void onMapReady(MapboxMap mapboxMap) {
+
+                // Customize map with markers, polylines, etc.
+
+                }
+            });
 
         } else {
             // ...
