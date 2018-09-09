@@ -1,6 +1,7 @@
 package actparks.parksapp.Walks;
 
 import android.Manifest;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -18,6 +19,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -63,6 +65,7 @@ public class  WalksActivity extends AppCompatActivity {
     TextView title;
     ImageView imageView;
     private MapView mapView;
+    Walk walk;
 
     private SectionsPageAdapter sectionsPageAdapter;
 
@@ -70,43 +73,15 @@ public class  WalksActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Mapbox.getInstance(this, getString(R.string.access_token));
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setContentView(R.layout.activity_walks);
 
-        // Create Tabs
-        TabHost host = (TabHost) findViewById(R.id.tabHostParks);
-        host.setup();
-
-
-        //Tab 1
-        TabHost.TabSpec spec = host.newTabSpec("Information");
-        spec.setContent(R.id.tab1);
-        spec.setIndicator("Information");
-        host.addTab(spec);
-
-        //Tab 2
-        spec = host.newTabSpec("Map");
-        spec.setContent(R.id.tab2);
-        spec.setIndicator("Map");
-        spec.setContent(new TabHost.TabContentFactory() {
-            @Override
-            public View createTabContent(String s) {
-                return mapView;
-            }
-        });
-        host.addTab(spec);
-
-
-
-        // Contents
-
-
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra("Walk")) {
             // Gets walk file
-            Walk walk = intent.getParcelableExtra("Walk");
+            walk = intent.getParcelableExtra("Walk");
             // TODO: get customer details based on customer id
 
             // Title
@@ -114,93 +89,57 @@ public class  WalksActivity extends AppCompatActivity {
             title = (TextView) findViewById(R.id.walkActivityNameText);
             title.setText(name);
 
-            // Tags
-            String[] tagArray = ArrayHelpers.convertStringToArray(walk.tags);
-            ArrayAdapter<String> aItems = new ArrayAdapter<String>(this, R.layout.simple_list_item_walk_tags, tagArray);
-            GridView lvTest = (GridView) findViewById(R.id.walksGridview);
-            if (tagArray.length == 0) {
-                lvTest.setMinimumHeight(0);
-            }
 
-            // Difficulty
-            RatingBar difficulty = (RatingBar) findViewById(R.id.ratingWalk);
-            difficulty.setRating(walk.mDifficulty);
-
-            // Distance
-            TextView distance = (TextView) findViewById(R.id.textWalkDistance);
-            distance.setText(walk.mDistance + "km");
-
-            // Time
-            TextView time = (TextView) findViewById(R.id.textWalkTime);
-            time.setText(walk.mLengthTime + "hrs");
-
-            // Description
-            TextView description = (TextView) findViewById(R.id.walkActivityDescriptionText);
-            description.setText(walk.mDescription);
-
-            lvTest.setAdapter(aItems);
-
-            // MapBox
-
-            mapView = (MapView) findViewById(R.id.mapWalkView);
-            mapView.onCreate(savedInstanceState);
-            mapView.getMapAsync(new OnMapReadyCallback() {
-                @Override
-                public void onMapReady(MapboxMap mapboxMap) {
-
-                // Customize map with markers, polylines, etc.
-
-                }
-            });
 
         } else {
             // ...
         }
 
+
+        //Info Button
+
+
+        Button Info_Button = (Button) findViewById(R.id.info_walk_button);
+        Info_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getIntent().putExtra("walk", walk);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.walks_tab_fragment, new WalksInfo())
+                        .commit();
+            }
+        });
+
+        //Maps Button
+
+
+        Button Maps_Button = (Button) findViewById(R.id.map_walk_button);
+        Maps_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getIntent().putExtra("walk", walk);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.walks_tab_fragment, new WalksMap())
+                        .commit();
+            }
+        });
+
+
+
+
+
+
+        // Contents
+
+
+
+
     }
 
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        mapView.onStart();
-    }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        mapView.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mapView.onPause();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        mapView.onStop();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
-    }
 
     // Back button
     @Override
