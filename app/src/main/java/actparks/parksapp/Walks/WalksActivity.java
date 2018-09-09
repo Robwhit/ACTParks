@@ -1,4 +1,4 @@
-package actparks.parksapp;
+package actparks.parksapp.Walks;
 
 import android.Manifest;
 import android.content.Intent;
@@ -52,6 +52,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import actparks.parksapp.Helpers.ArrayHelpers;
+import actparks.parksapp.R;
+import actparks.parksapp.SectionsPageAdapter;
 import actparks.parksapp.WalkDatabaseFiles.Walk;
 
 import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;

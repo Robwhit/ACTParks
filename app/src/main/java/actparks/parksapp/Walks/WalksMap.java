@@ -1,6 +1,5 @@
-package actparks.parksapp;
+package actparks.parksapp.Walks;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,23 +7,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+import actparks.parksapp.R;
+
 
 //reference: https://github.com/mapbox/mapbox-gl-native/issues/9496
 
-public class Mymapbox extends android.support.v4.app.Fragment {
+public class WalksMap extends android.support.v4.app.Fragment {
 
     private MapView mapView;
 
-    //@Nullable
-    //@Override
-    //public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-       // return inflater.inflate(R.layout.fragment_mymapbox, container, false);
-    //}
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_walksmap, container, false);
+    }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {

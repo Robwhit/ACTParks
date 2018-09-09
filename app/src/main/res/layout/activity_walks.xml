@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WalksActivity">
+    tools:context=".Walks.WalksActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -182,16 +182,7 @@
                             android:layout_height="wrap_content"
                             android:text="maps2"/>
 
-                        <com.mapbox.mapboxsdk.maps.MapView
-                            android:id="@+id/mapWalkView"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            mapbox:mapbox_cameraTargetLat="41.885"
-                            mapbox:mapbox_cameraTargetLng="-87.679"
-                            mapbox:mapbox_styleUrl="@string/mapbox_style_dark"
-                            mapbox:mapbox_cameraTilt="60"
-                            mapbox:mapbox_cameraZoom="12"
-                            />
+
 
 
 

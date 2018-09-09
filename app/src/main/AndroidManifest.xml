@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ParkActivity" />
-        <activity android:name=".WalksActivity">
+        <activity android:name=".Walks.WalksActivity">
 
         </activity>
 

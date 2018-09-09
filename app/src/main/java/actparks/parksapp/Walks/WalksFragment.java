@@ -1,4 +1,4 @@
-package actparks.parksapp;
+package actparks.parksapp.Walks;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -8,9 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +18,8 @@ import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
 import java.util.List;
-import java.util.Random;
 
+import actparks.parksapp.R;
 import actparks.parksapp.WalkDatabaseFiles.Walk;
 import actparks.parksapp.WalkDatabaseFiles.WalkClickListener;
 import actparks.parksapp.WalkDatabaseFiles.WalkListAdapter;
