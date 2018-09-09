@@ -1,5 +1,6 @@
 package actparks.parksapp.Walks;
 
+import android.app.FragmentManager;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -105,6 +106,8 @@ public class WalksFragment extends Fragment {
                 popup.show(); //showing popup menu
             }
         }); //closing the setOnClickListener method
+
+
 
 
     }

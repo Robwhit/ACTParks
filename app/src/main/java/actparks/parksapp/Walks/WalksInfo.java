@@ -1,5 +1,6 @@
 package actparks.parksapp.Walks;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -31,13 +33,6 @@ public class WalksInfo extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance) {
         myView = inflater.inflate(R.layout.fragment_walksinfo, container, false);
-        return myView;
-
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
 
         Intent i  = getActivity().getIntent();
 
@@ -47,8 +42,18 @@ public class WalksInfo extends Fragment {
         }
 
 
-        // Tags
-        System.out.println(walk.mName);
+
+        return myView;
+
+
+
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+// Tags
+        System.out.println(walk.tags);
         String[] tagArray = ArrayHelpers.convertStringToArray(walk.tags);
         ArrayAdapter<String> aItems = new ArrayAdapter<String>(getActivity(), R.layout.simple_list_item_walk_tags, tagArray);
         GridView lvTest = (GridView) getActivity().findViewById(R.id.walksGridview);
@@ -73,8 +78,6 @@ public class WalksInfo extends Fragment {
         description.setText(walk.mDescription);
 
         lvTest.setAdapter(aItems);
-
-
 
 
     }

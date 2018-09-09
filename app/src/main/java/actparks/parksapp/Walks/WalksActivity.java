@@ -91,6 +91,8 @@ public class  WalksActivity extends AppCompatActivity {
 
 
 
+
+
         } else {
             // ...
         }
@@ -126,18 +128,14 @@ public class  WalksActivity extends AppCompatActivity {
             }
         });
 
+        // Show info
 
-
-
-
-
-        // Contents
-
-
-
-
+        getIntent().putExtra("walk", walk);
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.walks_tab_fragment, new WalksInfo())
+                .commit();
     }
-
 
 
 
