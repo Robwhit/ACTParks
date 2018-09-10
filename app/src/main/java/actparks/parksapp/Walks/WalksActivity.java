@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -98,6 +99,26 @@ public class  WalksActivity extends AppCompatActivity {
         }
 
 
+
+
+        // Show Info
+
+
+
+        FragmentManager fragmentManager = getFragmentManager();
+        getIntent().putExtra("walk", walk);
+        fragmentManager.beginTransaction()
+                .replace(R.id.walks_info_fragment, new WalksInfo())
+                .commit();
+
+
+        // Show Maps
+        getIntent().putExtra("walk", walk);
+        fragmentManager.beginTransaction()
+                .replace(R.id.walks_map_fragment, new WalksMap())
+                .commit();
+
+
         //Info Button
 
 
@@ -105,11 +126,10 @@ public class  WalksActivity extends AppCompatActivity {
         Info_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getIntent().putExtra("walk", walk);
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.walks_tab_fragment, new WalksInfo())
-                        .commit();
+                FrameLayout info = findViewById(R.id.walks_info_fragment);
+                FrameLayout maps = findViewById(R.id.walks_map_fragment);
+                info.setVisibility(View.VISIBLE);
+                maps.setVisibility(View.GONE);
             }
         });
 
@@ -120,21 +140,12 @@ public class  WalksActivity extends AppCompatActivity {
         Maps_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getIntent().putExtra("walk", walk);
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.walks_tab_fragment, new WalksMap())
-                        .commit();
+                FrameLayout info = findViewById(R.id.walks_info_fragment);
+                FrameLayout maps = findViewById(R.id.walks_map_fragment);
+                info.setVisibility(View.GONE);
+                maps.setVisibility(View.VISIBLE);
             }
         });
-
-        // Show info
-
-        getIntent().putExtra("walk", walk);
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.walks_tab_fragment, new WalksInfo())
-                .commit();
     }
 
 
