@@ -67,6 +67,7 @@ public class  WalksActivity extends AppCompatActivity {
     ImageView imageView;
     private MapView mapView;
     Walk walk;
+    int mapOpen;
 
     private SectionsPageAdapter sectionsPageAdapter;
 
@@ -112,13 +113,11 @@ public class  WalksActivity extends AppCompatActivity {
                 .commit();
 
 
-        // Show Maps
-        getIntent().putExtra("walk", walk);
-        fragmentManager.beginTransaction()
-                .replace(R.id.walks_map_fragment, new WalksMap())
-                .commit();
 
 
+
+        FrameLayout maps = findViewById(R.id.walks_map_fragment);
+        maps.setVisibility(View.GONE);
         //Info Button
 
 
@@ -135,11 +134,19 @@ public class  WalksActivity extends AppCompatActivity {
 
         //Maps Button
 
-
+        mapOpen = 0;
         Button Maps_Button = (Button) findViewById(R.id.map_walk_button);
         Maps_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (mapOpen == 0){
+                    // Show Maps
+                    getIntent().putExtra("walk", walk);
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.walks_map_fragment, new WalksMap())
+                            .commit();
+                    mapOpen = 1;
+                }
                 FrameLayout info = findViewById(R.id.walks_info_fragment);
                 FrameLayout maps = findViewById(R.id.walks_map_fragment);
                 info.setVisibility(View.GONE);
