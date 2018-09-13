@@ -42,12 +42,16 @@
 
     </FrameLayout>
 
-    <FrameLayout
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/mapWalkView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/walks_map_fragment">
-
-    </FrameLayout>
+        mapbox:mapbox_cameraTargetLat="41.885"
+        mapbox:mapbox_cameraTargetLng="-87.679"
+        mapbox:mapbox_styleUrl="@string/mapbox_style_dark"
+        mapbox:mapbox_cameraTilt="60"
+        mapbox:mapbox_cameraZoom="12"
+        />
 
 
 

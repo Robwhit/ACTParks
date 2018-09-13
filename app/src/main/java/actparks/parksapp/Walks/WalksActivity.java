@@ -65,15 +65,18 @@ public class  WalksActivity extends AppCompatActivity {
 
     TextView title;
     ImageView imageView;
-    private MapView mapView;
+
     Walk walk;
     int mapOpen;
+    MapView mapView;
 
     private SectionsPageAdapter sectionsPageAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // MapBox
+        Mapbox.getInstance(this, getString(R.string.access_token));
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -91,6 +94,20 @@ public class  WalksActivity extends AppCompatActivity {
             title = (TextView) findViewById(R.id.walkActivityNameText);
             title.setText(name);
 
+
+            //Maps
+
+
+            mapView = (MapView) findViewById(R.id.mapWalkView);
+            mapView.onCreate(savedInstanceState);
+            mapView.getMapAsync(new OnMapReadyCallback() {
+                @Override
+                public void onMapReady(MapboxMap mapboxMap) {
+
+                    // Customize map with markers, polylines, etc.
+
+                }
+            });
 
 
 
@@ -116,8 +133,8 @@ public class  WalksActivity extends AppCompatActivity {
 
 
 
-        FrameLayout maps = findViewById(R.id.walks_map_fragment);
-        maps.setVisibility(View.GONE);
+
+        mapView.setVisibility(View.GONE);
         //Info Button
 
 
@@ -126,9 +143,8 @@ public class  WalksActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FrameLayout info = findViewById(R.id.walks_info_fragment);
-                FrameLayout maps = findViewById(R.id.walks_map_fragment);
                 info.setVisibility(View.VISIBLE);
-                maps.setVisibility(View.GONE);
+                mapView.setVisibility(View.GONE);
             }
         });
 
@@ -141,16 +157,13 @@ public class  WalksActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (mapOpen == 0){
                     // Show Maps
-                    getIntent().putExtra("walk", walk);
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.walks_map_fragment, new WalksMap())
-                            .commit();
                     mapOpen = 1;
                 }
                 FrameLayout info = findViewById(R.id.walks_info_fragment);
-                FrameLayout maps = findViewById(R.id.walks_map_fragment);
+
                 info.setVisibility(View.GONE);
-                maps.setVisibility(View.VISIBLE);
+                mapView.setVisibility(View.VISIBLE);
+
             }
         });
     }
@@ -160,9 +173,57 @@ public class  WalksActivity extends AppCompatActivity {
     // Back button
     @Override
     public boolean onSupportNavigateUp(){
+
+
         finish();
         return true;
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
+
+
+
+
+
 
 
 }
