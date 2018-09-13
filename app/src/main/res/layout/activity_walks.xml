@@ -46,11 +46,10 @@
         android:id="@+id/mapWalkView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:mapbox_cameraTargetLat="41.885"
-        mapbox:mapbox_cameraTargetLng="-87.679"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_dark"
-        mapbox:mapbox_cameraTilt="60"
-        mapbox:mapbox_cameraZoom="12"
+        mapbox:mapbox_cameraTargetLat="-35.27454"
+        mapbox:mapbox_cameraTargetLng="149.09874"
+        mapbox:mapbox_styleUrl="@string/mapbox_style_outdoors"
+        mapbox:mapbox_cameraZoom="13"
         />
 
 
