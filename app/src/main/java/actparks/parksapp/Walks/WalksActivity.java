@@ -9,14 +9,11 @@ import android.support.annotation.NonNull;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.mapbox.android.core.location.LocationEngine;
 import com.mapbox.android.core.location.LocationEngineListener;
@@ -25,20 +22,17 @@ import com.mapbox.android.core.location.LocationEngineProvider;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin;
-import com.mapbox.mapboxsdk.plugins.locationlayer.modes.CameraMode;
 import com.mapbox.mapboxsdk.plugins.locationlayer.modes.RenderMode;
 
 import java.util.List;
 
 import actparks.parksapp.R;
-import actparks.parksapp.SectionsPageAdapter;
 import actparks.parksapp.WalkDatabaseFiles.Walk;
 
 public class  WalksActivity extends AppCompatActivity implements LocationEngineListener,PermissionsListener {
@@ -46,10 +40,8 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
     TextView title;
 
     Walk walk;
-    int mapOpen;
-    MapView mapView;
 
-    private SectionsPageAdapter sectionsPageAdapter;
+    MapView mapView;
 
     private MapboxMap map;
     private PermissionsManager permissionsManager;
@@ -85,17 +77,6 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
 
             mapView = (MapView) findViewById(R.id.mapWalkView);
             mapView.onCreate(savedInstanceState);
-//            mapView.getMapAsync(new OnMapReadyCallback() {
-//                @Override
-//                public void onMapReady(final MapboxMap mapboxMap) {
-//                    map = mapboxMap;
-//                    enableLocationPlugin();
-//                    Log.d("aaa", "aaa");
-//
-//                    // Customize map with markers, polylines, etc.
-//
-//                }
-//            });
 
         } else {
             // ...
@@ -129,10 +110,6 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
         Maps_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (mapOpen == 0){
-//                    // Show Maps
-//                    mapOpen = 1;
-//                }
                 FrameLayout info = findViewById(R.id.walks_info_fragment);
 
                 info.setVisibility(View.GONE);
@@ -142,7 +119,6 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
                     public void onMapReady(final MapboxMap mapboxMap) {
                         map = mapboxMap;
                         enableLocationPlugin();
-                        Log.d("aaa", "aaa");
 
                         // Customize map with markers, polylines, etc.
 
@@ -154,7 +130,7 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
 
     }
 
-
+//reference https://www.mapbox.com/help/android-navigation-sdk/
     @Override
     protected void onStop() {
         super.onStop();
