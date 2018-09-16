@@ -9,9 +9,10 @@ import android.support.annotation.NonNull;
 @Entity(tableName = "contact_table")
 public class Contact implements Parcelable{
 
-    public Contact(@NonNull int contactId, String contactName, String contactNumber, String contactLink){
+    public Contact(@NonNull int contactId, String contactName, String contactEmail, String contactNumber, String contactLink){
         this.contactId = contactId;
         this.contactName = contactName;
+        this.contactEmail = contactEmail;
         this.contactNumber = contactNumber;
         this.contactLink = contactLink;
     }
@@ -39,6 +40,9 @@ public class Contact implements Parcelable{
     @ColumnInfo(name = "contactNumber")
     public String contactNumber;
 
+    @ColumnInfo(name = "contactEmail")
+    public String contactEmail;
+
     @ColumnInfo(name = "contactLink")
     public String contactLink;
 
@@ -51,12 +55,14 @@ public class Contact implements Parcelable{
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(contactId);
         dest.writeString(contactName);
+        dest.writeString(contactEmail);
         dest.writeString(contactNumber);
         dest.writeString( contactLink );
     }
     public void readFromParcel(Parcel in){
         contactId = in.readInt();
         contactName = in.readString();
+        contactEmail = in.readString();
         contactNumber = in.readString();
         contactLink = in.readString();
     }
