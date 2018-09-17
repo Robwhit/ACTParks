@@ -53,8 +53,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
             Contact current = mContacts.get(position);
             holder.contactItemView.setText(current.contactName);
             String number = current.contactNumber;
-            number = String.format("%s %s %s %s", number.substring(0, 3), number.substring(3, 6),
-                    number.substring(6, 9), number.substring(9, 12));
+
             holder.contactNumberView.setText(number );
             //holder.contactItemView.setText(current.contactNumber);
         } else {

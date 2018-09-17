@@ -32,6 +32,8 @@ import java.io.IOException;
 import java.net.Socket;
 
 import actparks.parksapp.ContactDatabaseFiles.Contact;
+import actparks.parksapp.ContactDatabaseFiles.ContactDao;
+import actparks.parksapp.ContactDatabaseFiles.ContactRoomDatabase;
 import actparks.parksapp.Walks.WalksFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -111,41 +113,13 @@ public class MainActivity extends AppCompatActivity
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
         }
 
-        new Thread(new Runnable(){
-            public void run(){
-                //open socket
-                try {
-                    receiveContact();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
 
-        //TODO: Receive the contact list
 
 
 
     }
 
-    public void receiveContact() throws IOException {
-        String host = "35.197.184.151";
-        int port = 10002;
-        try {
-            Socket sock = new Socket(host, port);
-            DataInputStream in = new DataInputStream(sock.getInputStream());
-            String msg = in.readUTF();
-            Gson gson = new Gson();
 
-            // con is the received Contact class
-            Contact con = gson.fromJson(msg, Contact.class);
-            // For Test
-            Log.d("contactRecieve", con.contactName);
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
