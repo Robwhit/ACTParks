@@ -1,6 +1,8 @@
 package actparks.parksapp.Walks;
 
 import android.app.FragmentManager;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 
 import android.location.Location;
@@ -22,6 +24,7 @@ import com.mapbox.android.core.location.LocationEngineProvider;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -33,7 +36,10 @@ import com.mapbox.mapboxsdk.plugins.locationlayer.modes.RenderMode;
 import java.util.List;
 
 import actparks.parksapp.R;
+import actparks.parksapp.RouteDatabaseFiles.Route;
+import actparks.parksapp.RouteDatabaseFiles.RouteViewModel;
 import actparks.parksapp.WalkDatabaseFiles.Walk;
+import actparks.parksapp.WalkDatabaseFiles.WalkViewModel;
 
 public class  WalksActivity extends AppCompatActivity implements LocationEngineListener,PermissionsListener {
 
@@ -48,6 +54,8 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
     private LocationLayerPlugin locationPlugin;
     private LocationEngine locationEngine;
     private Location originLocation;
+    private LiveData<List<Route>> mRoutes;
+    RouteViewModel mRouteViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +85,11 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
 
             mapView = (MapView) findViewById(R.id.mapWalkView);
             mapView.onCreate(savedInstanceState);
+
+
+            // The route
+            mRouteViewModel = ViewModelProviders.of(this).get(RouteViewModel.class);
+            mRoutes = mRouteViewModel.getRouteWithId(walk.mId);
 
         } else {
             // ...
@@ -119,6 +132,11 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
                     public void onMapReady(final MapboxMap mapboxMap) {
                         map = mapboxMap;
                         enableLocationPlugin();
+
+                        for (int i = 0; i < mRoutes.getValue().size(); i++){
+                            mapboxMap.addMarker(new MarkerOptions()
+                                    .position(new LatLng(Double.parseDouble(mRoutes.getValue().get(i).x),Double.parseDouble(mRoutes.getValue().get(i).y))));
+                        }
 
                         // Customize map with markers, polylines, etc.
 

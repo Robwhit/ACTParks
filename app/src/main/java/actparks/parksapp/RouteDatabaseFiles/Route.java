@@ -3,6 +3,7 @@ package actparks.parksapp.RouteDatabaseFiles;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverter;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -49,7 +50,7 @@ public class Route implements Parcelable {
     @ColumnInfo(name = "elevation")
     public String elevation;
 
-    @ColumnInfo(name = "order")
+    @ColumnInfo(name = "point_order")
     public int order;
 
     @Override
@@ -74,4 +75,6 @@ public class Route implements Parcelable {
         elevation = in.readString();
         order = in.readInt();
     }
+
+
 }

@@ -50,8 +50,13 @@ public abstract class RouteRoomDatabase extends RoomDatabase {
         @Override
         protected Void doInBackground(final Void... params) {
             mDao.deleteAll();
-            Route walkid = new Route(1, "-35.276435", "149.1250938","20", 1);
+            Route walkid = new Route(1, "-35.269279", "149.099063","20", 1);
             mDao.insert(walkid);
+            walkid = new Route(1, "-35.274439", "149.092291","270", 2);
+            mDao.insert(walkid);
+            walkid = new Route(1, "-35.277741", "149.098302","110", 3);
+            mDao.insert(walkid);
+
             return null;
         }
     }

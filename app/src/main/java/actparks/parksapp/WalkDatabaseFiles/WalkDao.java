@@ -36,7 +36,7 @@ public interface WalkDao {
     LiveData<List<Walk>> searchWalkDistance(Float minDistance, Float maxDistance);
 
     // Search Algorthm
-    @Query("SELECT * FROM walk_table WHERE name LIKE :search")
+    @Query("SELECT * FROM walk_table WHERE name LIKE :search ")
     LiveData<List<Walk>> searchWalkName(String search);
 
 
