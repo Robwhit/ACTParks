@@ -23,7 +23,7 @@ public class RouteRepository {
     }
 
     LiveData<List<Route>> getmRouteWithId(int id) {
-        return mRouteWithId;
+        return mRouteDao.getRouteWithId(id);
     }
 
     public void insert(Route route){

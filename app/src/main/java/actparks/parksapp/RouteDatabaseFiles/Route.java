@@ -36,8 +36,10 @@ public class Route implements Parcelable {
         }
     };
 
-    @PrimaryKey
-    @NonNull
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    public int id;
+
     @ColumnInfo(name = "walkid")
     public int walkid;
 
