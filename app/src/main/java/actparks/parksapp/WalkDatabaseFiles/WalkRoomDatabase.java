@@ -58,7 +58,7 @@ public abstract class WalkRoomDatabase extends RoomDatabase{
                     4, 5.00,"1:05", "this is Robs walk");
             mDao.insert(id);
             id = new Walk(2, "Harrys Walk","Short Walk__,__Easy Difficulty",
-                    2, 2.75,"0:42", "this is Harrys walk");
+                    2, 7.75,"0:42", "this is Harrys walk");
             mDao.insert(id);
             return null;
         }

@@ -26,6 +26,8 @@ public interface WalkDao {
     @Query("SELECT * from walk_table ORDER BY name ASC")
     LiveData<List<Walk>> getAllWalks();
 
+//    @Query("SELECT * from walk_table ORDER BY name DESC")
+
     // Sort by Distance
     @Query("SELECT * from walk_table ORDER BY distance ASC")
     LiveData<List<Walk>> sortWalkDistance();

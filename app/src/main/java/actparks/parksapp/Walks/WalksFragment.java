@@ -32,6 +32,7 @@ public class WalksFragment extends Fragment {
     View myView;
     Button walksButton;
     private WalkViewModel mWalkViewModel;
+//    WalkViewModel newWalkViewModel;
     Button button_filter;
     Button button_sort;
 
@@ -73,11 +74,15 @@ public class WalksFragment extends Fragment {
 
         // Walks
         mWalkViewModel = ViewModelProviders.of(this).get(WalkViewModel.class);
+
+        // initial order
         mWalkViewModel.getmAllWalks().observe(this, new Observer<List<Walk>>() {
             @Override
             public void onChanged(@Nullable final List<Walk> walks) {
                 // Update the cached copy of the words in the adapter.
                 adapter1.setWalks(walks);
+                System.out.println("aaaaaaaaaaaaaa101001010101001010100199999999999");
+                System.out.println(mWalkViewModel.getmAllWalks().toString());
             }
         });
 
@@ -124,6 +129,27 @@ public class WalksFragment extends Fragment {
                                 "You Clicked : " + item.getTitle(),
                                 Toast.LENGTH_SHORT
                         ).show();
+
+                        if (item.getTitle().equals("sort by name")){
+                            mWalkViewModel.getmAllWalks().observe(WalksFragment.this, new Observer<List<Walk>>() {
+                                @Override
+                                public void onChanged(@Nullable final List<Walk> walks) {
+                                    // Update the cached copy of the words in the adapter.
+                                    adapter1.setWalks(walks);
+                                }
+                            });
+                        }else if(item.getTitle().equals("sort by distance")) {
+
+                            mWalkViewModel.sortByDistance().observe(WalksFragment.this, new Observer<List<Walk>>() {
+                                @Override
+                                public void onChanged(@Nullable final List<Walk> walks) {
+                                    // Update the cached copy of the words in the adapter.
+                                    adapter1.setWalks(walks);
+                                }
+                            });
+
+                        }
+
                         return true;
                     }
                 });
