@@ -33,6 +33,7 @@ public class WalksFragment extends Fragment {
     Button walksButton;
     private WalkViewModel mWalkViewModel;
     Button button_filter;
+    Button button_sort;
 
     @Nullable
     @Override
@@ -108,7 +109,30 @@ public class WalksFragment extends Fragment {
         }); //closing the setOnClickListener method
 
 
+        //Sort
+        button_sort = (Button) myView.findViewById(R.id.walks_sort_button);
+        button_sort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(getContext(), button_sort);
+                popup.getMenuInflater()
+                        .inflate(R.menu.sort_walks, popup.getMenu());
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        Toast.makeText(
+                                getContext(),
+                                "You Clicked : " + item.getTitle(),
+                                Toast.LENGTH_SHORT
+                        ).show();
+                        return true;
+                    }
+                });
 
+                popup.show();
+            }
+        });
+
+        //
 
     }
 
