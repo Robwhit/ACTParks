@@ -13,6 +13,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/walkActivityNameText"
         android:textSize="24sp"
+        android:background="#6a6a2d"
+        android:textColor="#ffffff"
         />
 
     <LinearLayout
