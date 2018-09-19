@@ -35,7 +35,7 @@ public interface WalkDao {
     // FILTER Algorithms
 
     @Query("SELECT * from walk_table WHERE distance BETWEEN :minDistance AND :maxDistance")
-    LiveData<List<Walk>> searchWalkDistance(Float minDistance, Float maxDistance);
+    LiveData<List<Walk>> filterWalkDistance(Float minDistance, Float maxDistance);
 
     // Search Algorthm
     @Query("SELECT * FROM walk_table WHERE name LIKE :search ")

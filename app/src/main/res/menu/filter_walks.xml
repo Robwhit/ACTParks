@@ -7,15 +7,12 @@
 
         <item
             android:id="@+id/one"
-            android:title="One"/>
+            android:title="filter by distance"/>
 
         <item
             android:id="@+id/two"
-            android:title="Two"/>
+            android:title="filter something later"/>
 
-        <item
-            android:id="@+id/three"
-            android:title="Three"/>
     </group>
 
 </menu>

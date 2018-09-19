@@ -105,7 +105,37 @@ public class WalksFragment extends Fragment {
                                 "You Clicked : " + item.getTitle(),
                                 Toast.LENGTH_SHORT
                         ).show();
+
+                        if (item.getTitle().equals("filter by distance")){
+                            mWalkViewModel.filterByDistance((float)0.0, (float)10.00).observe(WalksFragment.this, new Observer<List<Walk>>() {
+                                @Override
+                                public void onChanged(@Nullable final List<Walk> walks) {
+                                    // Update the cached copy of the words in the adapter.
+                                    adapter1.setWalks(walks);
+                                }
+                            });
+                        }else if(item.getTitle().equals("filter something later")) {
+
+                            // TODO: add more filters later
+                            // initial order
+                            mWalkViewModel.getmAllWalks().observe(WalksFragment.this, new Observer<List<Walk>>() {
+                                @Override
+                                public void onChanged(@Nullable final List<Walk> walks) {
+                                    // Update the cached copy of the words in the adapter.
+                                    adapter1.setWalks(walks);
+                                }
+                            });
+
+                            Toast.makeText(
+                                    getContext(),
+                                    "empty now, may filter something later ",
+                                    Toast.LENGTH_SHORT
+                            ).show();
+
+                        }
+
                         return true;
+
                     }
                 });
 
