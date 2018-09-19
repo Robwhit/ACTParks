@@ -64,6 +64,8 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
     RouteViewModel mRouteViewModel;
 
     Boolean mapStarted = false;
+    Boolean recievedRoutes = false;
+    ArrayList<LatLng> points;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,7 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setContentView(R.layout.activity_walks);
+        points = new ArrayList<LatLng>();
 
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra("Walk")) {
@@ -86,6 +89,7 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
             String name = walk.mName;
             title = (TextView) findViewById(R.id.walkActivityNameText);
             title.setText(name);
+
 
 
             //Maps
@@ -101,9 +105,17 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
             mRouteViewModel.getRouteWithId(walk.mId).observe(this, new Observer<List<Route>>() {
                 @Override
                 public void onChanged(@Nullable final List<Route> route) {
-                    mRoutes = route;
+                    if (!recievedRoutes){
+                        mRoutes = route;
+                        recievedRoutes = true;
+                    }
                 }
+
             });
+
+
+
+
 
         } else {
             // ...
@@ -152,14 +164,15 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
                             map = mapboxMap;
                             enableLocationPlugin();
 
-                            ArrayList<LatLng> points = new ArrayList<LatLng>();
+
                             Log.d("test", Integer.toString(mRoutes.size()));
-
-
+                            // Coordinates on map
                             for (int i = 0; i < mRoutes.size(); i++) {
                                 points.add(new LatLng(Double.parseDouble(mRoutes.get(i).x), Double.parseDouble(mRoutes.get(i).y), Double.parseDouble(mRoutes.get(i).elevation)));
                                 System.out.println(points.get(i));
                             }
+
+
 
                             if (points.size() > 0) {
                                 mapboxMap.addPolyline(new PolylineOptions()
