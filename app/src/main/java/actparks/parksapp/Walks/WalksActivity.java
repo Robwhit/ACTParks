@@ -30,8 +30,10 @@ import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.annotations.PolylineOptions;
+import com.mapbox.mapboxsdk.camera.CameraUpdate;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
@@ -177,8 +179,8 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
                             if (points.size() > 0) {
                                 mapboxMap.addPolyline(new PolylineOptions()
                                         .addAll(points)
-                                        .color(Color.parseColor("#3bb2d0"))
-                                        .width(2));
+                                        .color(R.color.colorAccent)
+                                        .width(4));
                                 // Customize map with markers, polylines, etc.
                             }
                             // Customize map with markers, polylines, etc.
@@ -282,7 +284,7 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
     public void onLocationChanged(Location location) {
         if (location != null) {
             originLocation = location;
-            setCameraPosition(location);
+            setCameraPosition(points);
             locationEngine.removeLocationEngineListener(this);
         }
     }
@@ -318,14 +320,23 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
         Location lastLocation = locationEngine.getLastLocation();
         if (lastLocation != null) {
             originLocation = lastLocation;
-            setCameraPosition(lastLocation);
+            setCameraPosition(points);
         } else {
             locationEngine.addLocationEngineListener((LocationEngineListener) this);
         }
     }
 
-    private void setCameraPosition(Location location) {
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                new LatLng(location.getLatitude(), location.getLongitude()), 13));
+    private void setCameraPosition(ArrayList<LatLng> list) {
+
+        if (list.size()>0) {
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            for (LatLng marker : list) {
+                builder.include(marker);
+            }
+
+            LatLngBounds bounds = builder.build();
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, 100);
+            map.moveCamera(cameraUpdate);
+        }
     }
 }
