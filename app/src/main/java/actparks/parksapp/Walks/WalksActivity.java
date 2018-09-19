@@ -63,6 +63,8 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
     private List<Route> mRoutes;
     RouteViewModel mRouteViewModel;
 
+    Boolean mapStarted = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -141,32 +143,36 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
 
                 info.setVisibility(View.GONE);
                 mapView.setVisibility(View.VISIBLE);
-                mapView.getMapAsync(new OnMapReadyCallback() {
-                    @Override
-                    public void onMapReady(final MapboxMap mapboxMap) {
-                        map = mapboxMap;
-                        enableLocationPlugin();
 
-                        ArrayList<LatLng> points = new ArrayList<LatLng>();
-                        Log.d("test",Integer.toString(mRoutes.size()));
+                if (!mapStarted) {
+                    mapStarted = true;
+                    mapView.getMapAsync(new OnMapReadyCallback() {
+                        @Override
+                        public void onMapReady(final MapboxMap mapboxMap) {
+                            map = mapboxMap;
+                            enableLocationPlugin();
+
+                            ArrayList<LatLng> points = new ArrayList<LatLng>();
+                            Log.d("test", Integer.toString(mRoutes.size()));
 
 
-                        for(int i = 0; i < mRoutes.size(); i++){
-                            points.add(new LatLng(Double.parseDouble(mRoutes.get(i).x),Double.parseDouble(mRoutes.get(i).y),Double.parseDouble(mRoutes.get(i).elevation)));
-                            System.out.println(points.get(i));
-                        }
+                            for (int i = 0; i < mRoutes.size(); i++) {
+                                points.add(new LatLng(Double.parseDouble(mRoutes.get(i).x), Double.parseDouble(mRoutes.get(i).y), Double.parseDouble(mRoutes.get(i).elevation)));
+                                System.out.println(points.get(i));
+                            }
 
-                        if (points.size() > 0) {
-                            mapboxMap.addPolyline(new PolylineOptions()
-                                    .addAll(points)
-                                    .color(Color.parseColor("#3bb2d0"))
-                                    .width(2));
+                            if (points.size() > 0) {
+                                mapboxMap.addPolyline(new PolylineOptions()
+                                        .addAll(points)
+                                        .color(Color.parseColor("#3bb2d0"))
+                                        .width(2));
+                                // Customize map with markers, polylines, etc.
+                            }
                             // Customize map with markers, polylines, etc.
-                        }
-                        // Customize map with markers, polylines, etc.
 
-                    }
-                });
+                        }
+                    });
+                }
 
             }
         });
