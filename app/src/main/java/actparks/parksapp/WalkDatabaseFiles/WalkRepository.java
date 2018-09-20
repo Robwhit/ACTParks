@@ -19,9 +19,20 @@ public class WalkRepository {
         mAllWalks = mWalkDao.getAllWalks();
     }
 
+    // sort
     LiveData<List<Walk>> getmAllWalks() {
+        mAllWalks = mWalkDao.getAllWalks();
         return mAllWalks;
     }
+
+    LiveData<List<Walk>> sortmDistanct() {
+        mAllWalks = mWalkDao.sortWalkDistance();
+        return  mAllWalks; }
+
+    //filter
+    LiveData<List<Walk>> filtermByDistance(Float minDistance, Float maxDistance) {
+        mAllWalks = mWalkDao.filterWalkDistance(minDistance, maxDistance);
+        return  mAllWalks; }
 
     public void insert(Walk walk){
         new insertAsyncTask(mWalkDao).execute(walk);

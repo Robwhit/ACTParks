@@ -8,11 +8,25 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <Button
-        android:id="@+id/walks_filter_button"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Bushwalk" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/walks_filter_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="filter"
+            />
+        <Button
+            android:id="@+id/walks_sort_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Sort" />
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/walksrecyclerview"

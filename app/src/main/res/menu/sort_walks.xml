@@ -6,12 +6,12 @@
 
 
         <item
-            android:id="@+id/one"
-            android:title="filter by distance"/>
+            android:id="@+id/s_one"
+            android:title="sort by name"/>
 
         <item
-            android:id="@+id/two"
-            android:title="filter something later"/>
+            android:id="@+id/s_two"
+            android:title="sort by distance"/>
 
     </group>
 

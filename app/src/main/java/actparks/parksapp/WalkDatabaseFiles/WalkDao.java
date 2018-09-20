@@ -26,6 +26,8 @@ public interface WalkDao {
     @Query("SELECT * from walk_table ORDER BY name ASC")
     LiveData<List<Walk>> getAllWalks();
 
+//    @Query("SELECT * from walk_table ORDER BY name DESC")
+
     // Sort by Distance
     @Query("SELECT * from walk_table ORDER BY distance ASC")
     LiveData<List<Walk>> sortWalkDistance();
@@ -33,7 +35,7 @@ public interface WalkDao {
     // FILTER Algorithms
 
     @Query("SELECT * from walk_table WHERE distance BETWEEN :minDistance AND :maxDistance")
-    LiveData<List<Walk>> searchWalkDistance(Float minDistance, Float maxDistance);
+    LiveData<List<Walk>> filterWalkDistance(Float minDistance, Float maxDistance);
 
     // Search Algorthm
     @Query("SELECT * FROM walk_table WHERE name LIKE :search ")

@@ -20,7 +20,23 @@ public class WalkViewModel extends AndroidViewModel{
         mAllWalks = mRepository.getmAllWalks();
     }
 
-    public LiveData<List<Walk>> getmAllWalks() { return mAllWalks;}
+    // sort
+    public LiveData<List<Walk>> getmAllWalks() {
+        mAllWalks = mRepository.getmAllWalks();
+        return mAllWalks;
+    }
 
+    public LiveData<List<Walk>> sortByDistance() {
+        mAllWalks = mRepository.sortmDistanct();
+        return mAllWalks;
+    }
+
+    // filter
+    public LiveData<List<Walk>> filterByDistance(Float minDistance, Float maxDistance) {
+        mAllWalks = mRepository.filtermByDistance(minDistance, maxDistance);
+        return mAllWalks;
+    }
+
+    //
     public void insert(Walk walk) {mRepository.insert(walk);}
 }

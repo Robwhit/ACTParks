@@ -19,7 +19,8 @@
             android:id="@+id/walks_recycler_title_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_green_light"
+            android:background="#6a6a2d"
+            android:textColor="#ffffff"
             android:textSize="30sp"
             android:gravity="center"/>
     </LinearLayout>

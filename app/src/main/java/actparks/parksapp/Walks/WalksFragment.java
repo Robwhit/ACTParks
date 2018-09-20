@@ -32,7 +32,9 @@ public class WalksFragment extends Fragment {
     View myView;
     Button walksButton;
     private WalkViewModel mWalkViewModel;
+//    WalkViewModel newWalkViewModel;
     Button button_filter;
+    Button button_sort;
 
     @Nullable
     @Override
@@ -72,11 +74,15 @@ public class WalksFragment extends Fragment {
 
         // Walks
         mWalkViewModel = ViewModelProviders.of(this).get(WalkViewModel.class);
+
+        // initial order
         mWalkViewModel.getmAllWalks().observe(this, new Observer<List<Walk>>() {
             @Override
             public void onChanged(@Nullable final List<Walk> walks) {
                 // Update the cached copy of the words in the adapter.
                 adapter1.setWalks(walks);
+                System.out.println("aaaaaaaaaaaaaa101001010101001010100199999999999");
+                System.out.println(mWalkViewModel.getmAllWalks().toString());
             }
         });
 
@@ -99,7 +105,37 @@ public class WalksFragment extends Fragment {
                                 "You Clicked : " + item.getTitle(),
                                 Toast.LENGTH_SHORT
                         ).show();
+
+                        if (item.getTitle().equals("filter by distance")){
+                            mWalkViewModel.filterByDistance((float)0.0, (float)10.00).observe(WalksFragment.this, new Observer<List<Walk>>() {
+                                @Override
+                                public void onChanged(@Nullable final List<Walk> walks) {
+                                    // Update the cached copy of the words in the adapter.
+                                    adapter1.setWalks(walks);
+                                }
+                            });
+                        }else if(item.getTitle().equals("filter something later")) {
+
+                            // TODO: add more filters later
+                            // initial order
+                            mWalkViewModel.getmAllWalks().observe(WalksFragment.this, new Observer<List<Walk>>() {
+                                @Override
+                                public void onChanged(@Nullable final List<Walk> walks) {
+                                    // Update the cached copy of the words in the adapter.
+                                    adapter1.setWalks(walks);
+                                }
+                            });
+
+                            Toast.makeText(
+                                    getContext(),
+                                    "empty now, may filter something later ",
+                                    Toast.LENGTH_SHORT
+                            ).show();
+
+                        }
+
                         return true;
+
                     }
                 });
 
@@ -108,7 +144,51 @@ public class WalksFragment extends Fragment {
         }); //closing the setOnClickListener method
 
 
+        //Sort
+        button_sort = (Button) myView.findViewById(R.id.walks_sort_button);
+        button_sort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(getContext(), button_sort);
+                popup.getMenuInflater()
+                        .inflate(R.menu.sort_walks, popup.getMenu());
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        Toast.makeText(
+                                getContext(),
+                                "You Clicked : " + item.getTitle(),
+                                Toast.LENGTH_SHORT
+                        ).show();
 
+                        if (item.getTitle().equals("sort by name")){
+                            mWalkViewModel.getmAllWalks().observe(WalksFragment.this, new Observer<List<Walk>>() {
+                                @Override
+                                public void onChanged(@Nullable final List<Walk> walks) {
+                                    // Update the cached copy of the words in the adapter.
+                                    adapter1.setWalks(walks);
+                                }
+                            });
+                        }else if(item.getTitle().equals("sort by distance")) {
+
+                            mWalkViewModel.sortByDistance().observe(WalksFragment.this, new Observer<List<Walk>>() {
+                                @Override
+                                public void onChanged(@Nullable final List<Walk> walks) {
+                                    // Update the cached copy of the words in the adapter.
+                                    adapter1.setWalks(walks);
+                                }
+                            });
+
+                        }
+
+                        return true;
+                    }
+                });
+
+                popup.show();
+            }
+        });
+
+        //
 
     }
 

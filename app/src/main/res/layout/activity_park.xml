@@ -28,15 +28,16 @@
                     android:text="Park Name"
                     tools:layout_editor_absoluteX="73dp"
                     tools:layout_editor_absoluteY="0dp"
-                    android:background="#a1d16a"
+                    android:background="#6a6a2d"
+                    android:textColor="#ffffff"
                     android:gravity="center"
-                    android:textSize="30dp"/>
+                    android:textSize="24dp"/>
 
                 <TabWidget
                     android:id="@android:id/tabs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#c6e8a0"
+                    android:background="@android:color/darker_gray"
                     android:gravity="center"
                     android:textSize="20sp"/>
 
