@@ -57,4 +57,7 @@ dependencies {
     implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:6.4.0'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:0.6.0'
 
+    // GraphView
+    implementation 'com.jjoe64:graphview:4.2.2'
+
 }

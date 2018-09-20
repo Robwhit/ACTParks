@@ -19,8 +19,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 import com.mapbox.android.core.location.LocationEngine;
 import com.mapbox.android.core.location.LocationEngineListener;
 import com.mapbox.android.core.location.LocationEnginePriority;
@@ -80,6 +84,7 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
 
         setContentView(R.layout.activity_walks);
         points = new ArrayList<LatLng>();
+        LinearLayout mapSection = findViewById(R.id.walks_map_section);
 
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra("Walk")) {
@@ -95,6 +100,7 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
 
 
             //Maps
+
 
 
             mapView = (MapView) findViewById(R.id.mapWalkView);
@@ -131,7 +137,10 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
                 .replace(R.id.walks_info_fragment, new WalksInfo())
                 .commit();
 
-        mapView.setVisibility(View.GONE);
+        mapSection.setVisibility(View.GONE);
+
+        // Graph View
+        GraphView graphView = findViewById(R.id.walkGraphView);
 
         //Info Button
         Button Info_Button = (Button) findViewById(R.id.info_walk_button);
@@ -140,7 +149,7 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
             public void onClick(View view) {
                 FrameLayout info = findViewById(R.id.walks_info_fragment);
                 info.setVisibility(View.VISIBLE);
-                mapView.setVisibility(View.GONE);
+                mapSection.setVisibility(View.GONE);
             }
         });
 
@@ -156,7 +165,7 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
 
 
                 info.setVisibility(View.GONE);
-                mapView.setVisibility(View.VISIBLE);
+                mapSection.setVisibility(View.VISIBLE);
 
                 if (!mapStarted) {
                     mapStarted = true;
@@ -172,18 +181,44 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
                             for (int i = 0; i < mRoutes.size(); i++) {
                                 points.add(new LatLng(Double.parseDouble(mRoutes.get(i).x), Double.parseDouble(mRoutes.get(i).y), Double.parseDouble(mRoutes.get(i).elevation)));
                                 System.out.println(points.get(i));
+
                             }
 
-
-
                             if (points.size() > 0) {
+                                // Create the route line onto map
                                 mapboxMap.addPolyline(new PolylineOptions()
                                         .addAll(points)
                                         .color(R.color.colorAccent)
                                         .width(4));
-                                // Customize map with markers, polylines, etc.
+                                setCameraPosition(points);
+
                             }
-                            // Customize map with markers, polylines, etc.
+
+
+                            LineGraphSeries<DataPoint> series;
+
+                            if (points.size() > 1){
+
+                                double total_distance = 0;
+
+                                series = new LineGraphSeries<>();
+
+                                for (int i = 0; i < points.size(); i++){
+                                    if (i > 0){
+                                        total_distance = total_distance + points.get(i).distanceTo(points.get(i-1))/1000;
+                                        System.out.println(total_distance);
+                                    }
+                                    series.appendData(new DataPoint(total_distance, points.get(i).getAltitude()),true,points.size()+1);
+
+
+                                }
+
+
+                                graphView.addSeries(series);
+                                graphView.getViewport().setXAxisBoundsManual(true);
+                                graphView.getViewport().setMaxX(total_distance);
+                            }
+
 
                         }
                     });
