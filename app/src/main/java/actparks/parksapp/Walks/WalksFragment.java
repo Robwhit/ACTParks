@@ -124,7 +124,7 @@ public class WalksFragment extends Fragment {
                             // set dialog message
                             alertDialogBuilder
                                     .setCancelable(false)
-                                    .setPositiveButton("OK",
+                                    .setPositiveButton("APPLY",
                                             new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog,int id) {
                                                     // check if both min and max are not empty
