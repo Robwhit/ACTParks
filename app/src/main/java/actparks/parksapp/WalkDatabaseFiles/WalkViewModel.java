@@ -31,6 +31,14 @@ public class WalkViewModel extends AndroidViewModel{
         return mAllWalks;
     }
 
+    //search
+    public LiveData<List<Walk>> searchWalkName(String s) {
+        mAllWalks = mRepository.searchWalkName(s);
+        return mAllWalks;
+    }
+
+
+
     // filter
     public LiveData<List<Walk>> filterByDistance(Float minDistance, Float maxDistance) {
         mAllWalks = mRepository.filtermByDistance(minDistance, maxDistance);

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +36,7 @@ public class WalksFragment extends Fragment {
     View myView;
     Button walksButton;
     private WalkViewModel mWalkViewModel;
+    private SearchView mySearchView;
 //    WalkViewModel newWalkViewModel;
     Button button_filter;
     Button button_sort;
@@ -86,6 +88,38 @@ public class WalksFragment extends Fragment {
                 adapter1.setWalks(walks);
             }
         });
+
+        //search
+        mySearchView = (SearchView) myView.findViewById(R.id.search_bar);
+
+        mySearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                System.out.println( "TextSubmit : " + s);
+                mWalkViewModel.searchWalkName(s).observe(WalksFragment.this, new Observer<List<Walk>>() {
+                    @Override
+                    public void onChanged(@Nullable final List<Walk> walks) {
+                        // Update the cached copy of the words in the adapter.
+                        adapter1.setWalks(walks);
+                    }
+                });
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                System.out.println( "TextChange : " + s);
+                mWalkViewModel.searchWalkName(s).observe(WalksFragment.this, new Observer<List<Walk>>() {
+                    @Override
+                    public void onChanged(@Nullable final List<Walk> walks) {
+                        // Update the cached copy of the words in the adapter.
+                        adapter1.setWalks(walks);
+                    }
+                });
+                return false;
+            }
+        });
+
 
         //Filter
         button_filter = (Button) myView.findViewById(R.id.walks_filter_button);

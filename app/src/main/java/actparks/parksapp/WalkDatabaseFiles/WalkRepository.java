@@ -19,6 +19,11 @@ public class WalkRepository {
         mAllWalks = mWalkDao.getAllWalks();
     }
 
+    //search
+    LiveData<List<Walk>> searchWalkName(String s) {
+        mAllWalks = mWalkDao.searchWalkName(s+"%");
+        return  mAllWalks; }
+
     // sort
     LiveData<List<Walk>> getmAllWalks() {
         mAllWalks = mWalkDao.getAllWalks();
