@@ -17,7 +17,10 @@ public interface ParkDao {
     @Query("DELETE FROM park_table")
     void deleteAll();
 
-    @Query("SELECT * from park_table ORDER BY parkId ASC")
+    @Query("SELECT * from park_table ORDER BY name ASC")
     LiveData<List<Park>> getAllParks();
+
+    @Query("SELECT * from park_table ORDER BY parkId ASC")
+    LiveData<List<Park>> getParksId();
 
 }

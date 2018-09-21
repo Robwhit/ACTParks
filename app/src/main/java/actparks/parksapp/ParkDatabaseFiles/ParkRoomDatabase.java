@@ -49,9 +49,9 @@ public abstract class ParkRoomDatabase extends RoomDatabase{
         @Override
         protected Void doInBackground(final Void... params) {
             mDao.deleteAll();
-            Park id = new Park(1, "my first park");
+            Park id = new Park(1, "zoe's park");
             mDao.insert(id);
-            id = new Park(2, "my second park");
+            id = new Park(2, "amy's park");
             mDao.insert(id);
             return null;
         }

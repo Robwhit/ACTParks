@@ -19,6 +19,12 @@ public class ParkRepository {
     }
 
     LiveData<List<Park>> getmAllParks() {
+        mAllParks = mParkDao.getAllParks();
+        return mAllParks;
+    }
+
+    LiveData<List<Park>> getParksId() {
+        mAllParks = mParkDao.getParksId();
         return mAllParks;
     }
 

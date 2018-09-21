@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ import actparks.parksapp.ParkDatabaseFiles.ParkViewModel;
 public class ParksFragment extends Fragment {
 
     View myView;
-    Button parksButton;
+    Button button_sort;
     private ParkViewModel mParkViewModel;
 
 
@@ -38,33 +39,7 @@ public class ParksFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance){
         myView = inflater.inflate(R.layout.fragment_parks, container, false);
-        parksButton = (Button) myView.findViewById(R.id.parks_button);
         final Context context = getActivity().getApplicationContext();
-
-//        parksButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //Intent intent = new Intent(getActivity(), ParkActivity.class);
-//                //startActivity(intent);
-//                PopupMenu popupMenu =new PopupMenu(context, v);
-//                MenuInflater menuInflater = popupMenu.getMenuInflater();
-//                menuInflater.inflate(R.menu.parks_name, popupMenu.getMenu());
-//
-//                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-//                    @Override
-//                    public boolean onMenuItemClick(MenuItem menuItem) {
-//                        if(menuItem.getTitle().equals("park1")) {
-//                            Intent intent = new Intent(getActivity(), ParkActivity.class);
-//                            startActivity(intent);
-//                        }
-//                        return true;
-//                    }
-//                });
-//                popupMenu.show();
-//            }
-//        });
-
-
 
         return myView;
 
@@ -91,13 +66,49 @@ public class ParksFragment extends Fragment {
 
 
         mParkViewModel = ViewModelProviders.of(this).get(ParkViewModel.class);
-        mParkViewModel.getmAllParks().observe(this, new Observer<List<Park>>() {
+        mParkViewModel.getParksID().observe(this, new Observer<List<Park>>() {
             @Override
             public void onChanged(@Nullable final List<Park> parks) {
                 // Update the cached copy of the words in the adapter.
                 park_adapter.setParks(parks);
             }
         });
+
+        //Sort
+        button_sort = (Button) myView.findViewById(R.id.parks_sort);
+        button_sort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(getContext(), button_sort);
+                popup.getMenuInflater()
+                        .inflate(R.menu.sort_parks, popup.getMenu());
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        Toast.makeText(
+                                getContext(),
+                                "You Clicked : " + item.getTitle(),
+                                Toast.LENGTH_SHORT
+                        ).show();
+
+                        if (item.getTitle().equals("sort by name")){
+                            mParkViewModel.getmAllParks().observe(ParksFragment.this, new Observer<List<Park>>() {
+                                @Override
+                                public void onChanged(@Nullable final List<Park> parks) {
+                                    // Update the cached copy of the words in the adapter.
+                                    park_adapter.setParks(parks);
+                                }
+                            });
+                        }
+
+                        return true;
+                    }
+                });
+
+                popup.show();
+            }
+        });
+
+        //
     }
 
 

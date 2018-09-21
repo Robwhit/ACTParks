@@ -10,10 +10,10 @@
     <!-- TODO: Update blank fragment layout -->
 
     <Button
-        android:id="@+id/parks_button"
+        android:id="@+id/parks_sort"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Park Lists" />
+        android:text="Sort" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/parksrecyclerview"
