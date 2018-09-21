@@ -23,4 +23,7 @@ public interface ParkDao {
     @Query("SELECT * from park_table ORDER BY parkId ASC")
     LiveData<List<Park>> getParksId();
 
+    // Search Algorthm
+    @Query("SELECT * FROM park_table WHERE name LIKE :search")
+    LiveData<List<Park>> searchParkName(String search);
 }

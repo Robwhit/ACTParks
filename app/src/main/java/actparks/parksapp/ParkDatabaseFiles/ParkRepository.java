@@ -18,6 +18,11 @@ public class ParkRepository {
         mAllParks = mParkDao.getAllParks();
     }
 
+    LiveData<List<Park>> searchParkName(String s) {
+        mAllParks = mParkDao.searchParkName(s + "%");
+        return mAllParks;
+    }
+
     LiveData<List<Park>> getmAllParks() {
         mAllParks = mParkDao.getAllParks();
         return mAllParks;

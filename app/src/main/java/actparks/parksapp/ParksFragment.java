@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,6 +33,7 @@ public class ParksFragment extends Fragment {
 
     View myView;
     Button button_sort;
+    private SearchView mySearchView;
     private ParkViewModel mParkViewModel;
 
 
@@ -71,6 +73,38 @@ public class ParksFragment extends Fragment {
             public void onChanged(@Nullable final List<Park> parks) {
                 // Update the cached copy of the words in the adapter.
                 park_adapter.setParks(parks);
+            }
+        });
+
+        //search
+        //search
+        mySearchView = (SearchView) myView.findViewById(R.id.search_bar);
+
+        mySearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                System.out.println( "TextSubmit : " + s);
+                mParkViewModel.searchParkName(s).observe(ParksFragment.this, new Observer<List<Park>>() {
+                    @Override
+                    public void onChanged(@Nullable final List<Park> parks) {
+                        // Update the cached copy of the words in the adapter.
+                        park_adapter.setParks(parks);
+                    }
+                });
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                System.out.println( "TextChange : " + s);
+                mParkViewModel.searchParkName(s).observe(ParksFragment.this, new Observer<List<Park>>() {
+                    @Override
+                    public void onChanged(@Nullable final List<Park> parks) {
+                        // Update the cached copy of the words in the adapter.
+                        park_adapter.setParks(parks);
+                    }
+                });
+                return false;
             }
         });
 

@@ -19,6 +19,13 @@ public class ParkViewModel extends AndroidViewModel {
         mAllParks = mRepository.getmAllParks();
     }
 
+    //search
+    public LiveData<List<Park>> searchParkName(String s) {
+        mAllParks = mRepository.searchParkName(s);
+        return mAllParks;
+    }
+
+
     public LiveData<List<Park>> getmAllParks() {
         mAllParks = mRepository.getmAllParks();
         return mAllParks;
