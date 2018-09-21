@@ -81,8 +81,6 @@ public class WalksFragment extends Fragment {
             public void onChanged(@Nullable final List<Walk> walks) {
                 // Update the cached copy of the words in the adapter.
                 adapter1.setWalks(walks);
-                System.out.println("aaaaaaaaaaaaaa101001010101001010100199999999999");
-                System.out.println(mWalkViewModel.getmAllWalks().toString());
             }
         });
 
