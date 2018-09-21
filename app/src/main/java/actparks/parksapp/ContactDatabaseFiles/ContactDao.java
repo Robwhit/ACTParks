@@ -18,4 +18,8 @@ public interface ContactDao {
 
     @Query("SELECT * from contact_table ORDER BY contactId ASC")
     LiveData<List<Contact>> getAllContacts();
+
+    // Search Algorthm
+    @Query("SELECT * FROM contact_table WHERE contactName LIKE :search")
+    LiveData<List<Contact>> searchContactName(String search);
 }

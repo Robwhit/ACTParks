@@ -77,7 +77,6 @@ public class ParksFragment extends Fragment {
         });
 
         //search
-        //search
         mySearchView = (SearchView) myView.findViewById(R.id.search_bar);
 
         mySearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import actparks.parksapp.ContactDatabaseFiles.ContactViewModel;
 public class ContactFragment extends Fragment {
 
     View myView;
+    private SearchView mySearchView;
     private ContactViewModel mContactViewModel;
 
     @Nullable
@@ -71,6 +73,37 @@ public class ContactFragment extends Fragment {
             public void onChanged(@Nullable final List<Contact> contacts) {
                 // Update the cached copy of the words in the adapter.
                 contact_adapter.setContacts(contacts);
+            }
+        });
+
+        //search
+        mySearchView = (SearchView) myView.findViewById(R.id.search_bar);
+
+        mySearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                System.out.println( "TextSubmit : " + s);
+                mContactViewModel.searchContactName(s).observe(ContactFragment.this, new Observer<List<Contact>>() {
+                    @Override
+                    public void onChanged(@Nullable final List<Contact> contacts) {
+                        // Update the cached copy of the words in the adapter.
+                        contact_adapter.setContacts(contacts);
+                    }
+                });
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                System.out.println( "TextChange : " + s);
+                mContactViewModel.searchContactName(s).observe(ContactFragment.this, new Observer<List<Contact>>() {
+                    @Override
+                    public void onChanged(@Nullable final List<Contact> contacts) {
+                        // Update the cached copy of the words in the adapter.
+                        contact_adapter.setContacts(contacts);
+                    }
+                });
+                return false;
             }
         });
     }

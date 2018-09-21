@@ -16,6 +16,11 @@ public class ContactRepository {
         mAllContacts = mContactDao.getAllContacts();
     }
 
+    LiveData<List<Contact>> searchContactName(String s) {
+        mAllContacts = mContactDao.searchContactName(s + "%");
+        return mAllContacts;
+    }
+
     LiveData<List<Contact>> getmAllContacts() {
         return mAllContacts;
     }
