@@ -1,9 +1,11 @@
 package actparks.parksapp.Walks;
 
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.support.v4.app.Fragment;
 import android.widget.Toast;
@@ -105,13 +108,59 @@ public class WalksFragment extends Fragment {
                         ).show();
 
                         if (item.getTitle().equals("filter by distance")){
-                            mWalkViewModel.filterByDistance((float)0.0, (float)10.00).observe(WalksFragment.this, new Observer<List<Walk>>() {
-                                @Override
-                                public void onChanged(@Nullable final List<Walk> walks) {
-                                    // Update the cached copy of the words in the adapter.
-                                    adapter1.setWalks(walks);
-                                }
-                            });
+                            // alert window to get user's input filter min_distance and max_distance
+                            // get xml view
+                            LayoutInflater lif = LayoutInflater.from(getContext());
+                            View alertView = lif.inflate(R.layout.filter_alert, null);
+                            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+
+                            alertDialogBuilder.setView(alertView);
+
+                            final EditText min_distance = (EditText) alertView
+                                    .findViewById(R.id.min_distance);
+                            final EditText max_distance = (EditText) alertView
+                                    .findViewById(R.id.max_distance);
+
+                            // set dialog message
+                            alertDialogBuilder
+                                    .setCancelable(false)
+                                    .setPositiveButton("OK",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog,int id) {
+                                                    // check if both min and max are not empty
+                                                    if(min_distance.getText().toString().equals("") || max_distance.getText().toString().equals(""))
+                                                    {
+                                                        Toast.makeText(getContext(), "Input distance Is Empty, Please Enter Some Text", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                    else
+                                                    {
+                                                        float min = Float.valueOf( min_distance.getText().toString() );
+                                                        float max = Float.valueOf( max_distance.getText().toString() );
+                                                        mWalkViewModel.filterByDistance(min, max).observe(WalksFragment.this, new Observer<List<Walk>>() {
+                                                            @Override
+                                                            public void onChanged(@Nullable final List<Walk> walks) {
+                                                                // Update the cached copy of the words in the adapter.
+                                                                adapter1.setWalks(walks);
+                                                            }
+                                                        });
+                                                    }
+
+                                                }
+                                            })
+                                    .setNegativeButton("Cancel",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog,int id) {
+                                                    dialog.cancel();
+                                                }
+                                            });
+
+                            // create alert dialog
+                            AlertDialog alertDialog = alertDialogBuilder.create();
+
+                            // show it
+                            alertDialog.show();
+
+
                         }else if(item.getTitle().equals("filter something later")) {
 
                             // TODO: add more filters later
