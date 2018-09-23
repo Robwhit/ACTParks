@@ -14,7 +14,8 @@ import android.support.annotation.NonNull;
 @Entity(tableName = "route_table")
 public class Route implements Parcelable {
 
-    public Route(@NonNull int walkid, String x, String y, String elevation, int order ){
+    public Route(@NonNull int id,int walkid, String x, String y, String elevation, int order ){
+        this.id = id;
         this.walkid = walkid;
         this.x = x;
         this.y = y;
@@ -62,6 +63,7 @@ public class Route implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
         parcel.writeInt(walkid);
         parcel.writeString(x);
         parcel.writeString(y);
@@ -71,6 +73,7 @@ public class Route implements Parcelable {
     }
 
     public void readFromParcel(Parcel in){
+        id = in.readInt();
         walkid = in.readInt();
         x = in.readString();
         y = in.readString();
