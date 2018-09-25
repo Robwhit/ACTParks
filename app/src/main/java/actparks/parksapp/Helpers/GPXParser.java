@@ -23,8 +23,7 @@ public class GPXParser {
     public List<List> ConvertGPX(File file){
         List<List> list = new ArrayList<>();
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-
-        int ord = 0;
+        String ele = null;
         try{
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
             FileInputStream fileInputStream = new FileInputStream(file);
@@ -48,7 +47,17 @@ public class GPXParser {
 
                 String newLocationName = newLatitude + ":" + newLongitude;
 
+
+                NodeList nList = node.getChildNodes();
+                for(int j=0; j<nList.getLength(); j++) {
+                    Node el = nList.item(j);
+                    if(el.getNodeName().equals("ele")) {
+                        ele = el.getTextContent();
+                    }
+                }
+
                 single_list.add(newLocationName);
+                single_list.add(ele);
 
                 list.add(single_list);
             }
