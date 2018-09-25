@@ -24,6 +24,7 @@ public class GPXParser {
         List<List> list = new ArrayList<>();
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         String ele = null;
+        int ord = 0;
         try{
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
             FileInputStream fileInputStream = new FileInputStream(file);
@@ -56,8 +57,10 @@ public class GPXParser {
                     }
                 }
 
+                ord = ord + 1;
                 single_list.add(newLocationName);
                 single_list.add(ele);
+                single_list.add(ord);
 
                 list.add(single_list);
             }
@@ -74,15 +77,6 @@ public class GPXParser {
         }
 
         return list;
-    }
-
-    public static void main(String[] args) {
-        GPXParser gpxParser = new GPXParser();
-        List<List>list = new ArrayList<>();
-        String path = "/Users/Jingjing//Downloads/Afternoon_Run.gpx";
-        File file = new File(path);
-        list = gpxParser.ConvertGPX(file);
-        System.out.print(list);
     }
 }
 
