@@ -8,6 +8,12 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import actparks.parksapp.Helpers.GPXParser;
+
 @Database(entities = {Route.class}, version = 1)
 public abstract class RouteRoomDatabase extends RoomDatabase {
     public abstract RouteDao routeDao();
@@ -49,7 +55,16 @@ public abstract class RouteRoomDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(final Void... params) {
+            GPXParser gpxParser = new GPXParser();
+            List<List>list = new ArrayList<>();
+            String path = "~/ACTParks/Afternoon_Run.gpx";
+            File file = new File(path);
+            list = gpxParser.ConvertGPX(file);
+
             mDao.deleteAll();
+
+
+
             Route walkid = new Route(1,1, "-35.269279", "149.099063","20", 1);
             mDao.insert(walkid);
             walkid = new Route(2,1, "-35.274439", "149.092291","270", 2);

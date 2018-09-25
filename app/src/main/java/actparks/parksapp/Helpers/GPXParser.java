@@ -18,6 +18,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+//reference http://android-coding.blogspot.com/2013/01/get-latitude-and-longitude-from-gpx-file.html
+
 public class GPXParser {
 
     public List<List> ConvertGPX(File file){
@@ -46,8 +48,6 @@ public class GPXParser {
 
                 String newLongitude = attributes.getNamedItem("lon").getTextContent();
 
-                String newLocationName = newLatitude + ":" + newLongitude;
-
 
                 NodeList nList = node.getChildNodes();
                 for(int j=0; j<nList.getLength(); j++) {
@@ -58,7 +58,8 @@ public class GPXParser {
                 }
 
                 ord = ord + 1;
-                single_list.add(newLocationName);
+                single_list.add(newLatitude);
+                single_list.add(newLongitude);
                 single_list.add(ele);
                 single_list.add(ord);
 
