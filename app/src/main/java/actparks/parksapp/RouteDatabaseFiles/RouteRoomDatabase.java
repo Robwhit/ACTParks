@@ -7,12 +7,15 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import com.google.gson.Gson;
 
-import actparks.parksapp.Helpers.GPXParser;
+import java.io.DataInputStream;
+
+import java.io.IOException;
+import java.net.Socket;
+
 
 @Database(entities = {Route.class}, version = 1)
 public abstract class RouteRoomDatabase extends RoomDatabase {
@@ -55,22 +58,36 @@ public abstract class RouteRoomDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(final Void... params) {
-            GPXParser gpxParser = new GPXParser();
-            List<List>list = new ArrayList<>();
-            String path = "~/ACTParks/Afternoon_Run.gpx";
-            File file = new File(path);
-            list = gpxParser.ConvertGPX(file);
 
             mDao.deleteAll();
-
-
-
             Route walkid = new Route(1,1, "-35.269279", "149.099063","20", 1);
             mDao.insert(walkid);
             walkid = new Route(2,1, "-35.274439", "149.092291","270", 2);
             mDao.insert(walkid);
             walkid = new Route(3, 1, "-35.277741", "149.098302","110", 3);
             mDao.insert(walkid);
+
+            new Thread(new Runnable(){
+                public void run(){
+                    //open socket
+                    try {
+                        String host = "35.197.184.151";
+                        int port = 10003;
+                        Socket sock = new Socket(host, port);
+                        DataInputStream in = new DataInputStream(sock.getInputStream());
+                        Gson gson = new Gson();
+                        String msg_route = in.readUTF();
+                        Route[]route = gson.fromJson(msg_route, Route[].class);
+
+                        for (int i  = 0; i < route.length; i++){
+                            mDao.insert(route[i]);
+                        }
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
 
             return null;
         }

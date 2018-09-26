@@ -10,7 +10,6 @@ import java.util.List;
 public class RouteRepository {
     private RouteDao mRouteDao;
     private LiveData<List<Route>> mAllRoutes;
-    private LiveData<List<Route>> mRouteWithId;
 
     RouteRepository(Application application){
         RouteRoomDatabase db = RouteRoomDatabase.getDatabase(application);
