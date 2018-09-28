@@ -110,7 +110,7 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
             // The route
             mRouteViewModel = ViewModelProviders.of(this).get(RouteViewModel.class);
 
-            mRouteViewModel.getRouteWithId(walk.mId).observe(this, new Observer<List<Route>>() {
+            mRouteViewModel.getAllRoutes().observe(this, new Observer<List<Route>>() {
                 @Override
                 public void onChanged(@Nullable final List<Route> route) {
                     if (!recievedRoutes){
@@ -181,7 +181,6 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
                             for (int i = 0; i < mRoutes.size(); i++) {
                                 points.add(new LatLng(Double.parseDouble(mRoutes.get(i).x), Double.parseDouble(mRoutes.get(i).y), Double.parseDouble(mRoutes.get(i).elevation)));
                                 System.out.println(points.get(i));
-
                             }
 
                             if (points.size() > 0) {
