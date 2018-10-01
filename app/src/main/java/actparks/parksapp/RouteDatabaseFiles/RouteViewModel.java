@@ -12,7 +12,6 @@ import java.util.List;
 import actparks.parksapp.WalkDatabaseFiles.Walk;
 
 public class RouteViewModel extends AndroidViewModel {
-
     private RouteRepository mRepository;
 
     private LiveData<List<Route>> mAllRoutes;
@@ -24,9 +23,10 @@ public class RouteViewModel extends AndroidViewModel {
         mAllRoutes = mRepository.getAllRoutes();
     }
 
-    public LiveData<List<Route>> getAllRoutes() {
+    LiveData<List<Route>> getAllRoutes() {
         return mAllRoutes;
     }
+
 
 
     public void insert(Route route) {
@@ -35,9 +35,8 @@ public class RouteViewModel extends AndroidViewModel {
 
 
     // TODO: Recieve the route from the database and create ArrayLists from it;
-//    public LiveData<List<Route>> getRouteWithId(int walkId){
-//        mAllRoutes = mRepository.getmRouteWithId(walkId);
-//        return mAllRoutes;
-//    }
-
+    public LiveData<List<Route>> getRouteWithId(int walkId){
+        mRoute = mRepository.getmRouteWithId(walkId);
+        return mRoute;
+    }
 }

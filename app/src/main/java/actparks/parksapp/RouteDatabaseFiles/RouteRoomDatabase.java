@@ -80,7 +80,6 @@ public abstract class RouteRoomDatabase extends RoomDatabase {
                         Route[]route = gson.fromJson(msg_route, Route[].class);
 
                         for (int i  = 0; i < route.length; i++){
-                            Log.d("aaa", route[i].toString());
                             mDao.insert(route[i]);
                         }
 
