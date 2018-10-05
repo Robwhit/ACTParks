@@ -42,7 +42,7 @@ import actparks.parksapp.WalkDatabaseFiles.WalkListAdapter;
 import actparks.parksapp.WalkDatabaseFiles.WalkViewModel;
 
 
-public class WalksFragment extends Fragment implements LocationListener {
+public class WalksFragment extends Fragment {
 
     View myView;
     Button walksButton;
@@ -246,7 +246,6 @@ public class WalksFragment extends Fragment implements LocationListener {
                 popup.getMenuInflater()
                         .inflate(R.menu.sort_walks, popup.getMenu());
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @SuppressLint("MissingPermission")
                     public boolean onMenuItemClick(MenuItem item) {
                         Toast.makeText(
                                 getContext(),
@@ -303,24 +302,4 @@ public class WalksFragment extends Fragment implements LocationListener {
 
     }
 
-    //Location listener
-    @Override
-    public void onLocationChanged(Location location) {
-
-    }
-
-    @Override
-    public void onStatusChanged(String s, int i, Bundle bundle) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String s) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String s) {
-
-    }
 }
