@@ -259,6 +259,16 @@ public class WalksFragment extends Fragment {
                                 }
                             });
 
+                        }else if(item.getTitle().equals("sort by distance from my location")) {
+
+                            mWalkViewModel.sortByDistance().observe(WalksFragment.this, new Observer<List<Walk>>() {
+                                @Override
+                                public void onChanged(@Nullable final List<Walk> walks) {
+                                    // Update the cached copy of the words in the adapter.
+                                    adapter1.setWalks(walks);
+                                }
+                            });
+
                         }
 
                         return true;
