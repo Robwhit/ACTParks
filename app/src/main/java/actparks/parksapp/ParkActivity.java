@@ -8,10 +8,14 @@ import android.widget.Button;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.maps.MapView;
+
 import actparks.parksapp.ParkDatabaseFiles.Park;
 
 public class ParkActivity extends AppCompatActivity {
     TextView title;
+    private MapView mapView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,9 @@ public class ParkActivity extends AppCompatActivity {
         spec.setIndicator("Map");
         host.addTab(spec);
 
+        //map
+        Mapbox.getInstance(this, getString(R.string.access_token));
+
         //bushwalks button
         final Button button = findViewById(R.id.bushwalks_button_id);
         button.setOnClickListener(new View.OnClickListener() {
@@ -53,12 +60,60 @@ public class ParkActivity extends AppCompatActivity {
             String name = park.parkName;
             title = (TextView) findViewById(R.id.parksActivityNameText);
             title.setText(name);
+
+            //map
+            mapView = findViewById(R.id.mapParkView);
+            mapView.onCreate(savedInstanceState);
         } else {
             // ...
         }
 
     }
 
+    //map
+    @Override
+    public void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
+
+    //
     @Override
     public boolean onSupportNavigateUp(){
         finish();
