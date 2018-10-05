@@ -1,14 +1,23 @@
 package actparks.parksapp.Walks;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Point;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -24,29 +33,32 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import actparks.parksapp.MainActivity;
 import actparks.parksapp.R;
+import actparks.parksapp.RouteDatabaseFiles.Route;
 import actparks.parksapp.WalkDatabaseFiles.Walk;
 import actparks.parksapp.WalkDatabaseFiles.WalkClickListener;
 import actparks.parksapp.WalkDatabaseFiles.WalkListAdapter;
 import actparks.parksapp.WalkDatabaseFiles.WalkViewModel;
 
 
-public class WalksFragment extends Fragment {
+public class WalksFragment extends Fragment implements LocationListener {
 
     View myView;
     Button walksButton;
     private WalkViewModel mWalkViewModel;
     private SearchView mySearchView;
-//    WalkViewModel newWalkViewModel;
+    Location currentLocation;
+    //    WalkViewModel newWalkViewModel;
     Button button_filter;
     Button button_sort;
 
+
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance){
-        myView = inflater.inflate(R.layout.fragment_walks, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance) {
+        myView = inflater.inflate( R.layout.fragment_walks, container, false );
         final Context context = getActivity().getApplicationContext();
-
 
         // TODO: Remove Button and Replace with List of buttons
 
@@ -234,6 +246,7 @@ public class WalksFragment extends Fragment {
                 popup.getMenuInflater()
                         .inflate(R.menu.sort_walks, popup.getMenu());
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @SuppressLint("MissingPermission")
                     public boolean onMenuItemClick(MenuItem item) {
                         Toast.makeText(
                                 getContext(),
@@ -260,6 +273,12 @@ public class WalksFragment extends Fragment {
                             });
 
                         }else if(item.getTitle().equals("sort by distance from my location")) {
+//                            currentLocation =
+//                            System.out.println("");
+                            String locationProvider;
+                            locationProvider = LocationManager.GPS_PROVIDER;
+                            currentLocation = MainActivity.locationManager.getLastKnownLocation(locationProvider);
+                            System.out.println("laaa: "+currentLocation.getLatitude()+" -- looo: "+currentLocation.getLongitude());
 
                             mWalkViewModel.sortByDistance().observe(WalksFragment.this, new Observer<List<Walk>>() {
                                 @Override
@@ -279,10 +298,29 @@ public class WalksFragment extends Fragment {
             }
         });
 
-        //
+        //get current location
+
 
     }
 
+    //Location listener
+    @Override
+    public void onLocationChanged(Location location) {
 
+    }
 
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
+    }
 }
