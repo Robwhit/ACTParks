@@ -278,7 +278,7 @@ public class WalksFragment extends Fragment {
                             currentLocation = MainActivity.locationManager.getLastKnownLocation( locationProvider );
                             System.out.println("laaa: "+currentLocation.getLatitude()+" -- looo: "+currentLocation.getLongitude());
 
-                            mWalkViewModel.sortByDistance().observe(WalksFragment.this, new Observer<List<Walk>>() {
+                            mWalkViewModel.sortByDistanceFromMe(currentLocation).observe(WalksFragment.this, new Observer<List<Walk>>() {
                                 @Override
                                 public void onChanged(@Nullable final List<Walk> walks) {
                                     // Update the cached copy of the words in the adapter.

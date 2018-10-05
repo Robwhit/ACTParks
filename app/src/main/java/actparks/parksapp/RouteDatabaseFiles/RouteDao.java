@@ -25,6 +25,6 @@ public interface RouteDao {
     @Query("SELECT * FROM route_table WHERE walkid LIKE :id ORDER BY point_order ASC")
     LiveData<List<Route>> getRouteWithId(int id);
 
-    @Query("SELECT * FROM route_table WHERE walkid LIKE :id AND point_order LIKE 1")
+    @Query("SELECT * FROM route_table WHERE walkid LIKE :id ORDER BY point_order ASC LIMIT 1")
     Route getStartPos(int id);
 }
