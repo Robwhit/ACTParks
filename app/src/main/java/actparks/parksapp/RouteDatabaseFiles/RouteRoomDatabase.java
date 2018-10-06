@@ -24,7 +24,7 @@ public abstract class RouteRoomDatabase extends RoomDatabase {
 
     private static RouteRoomDatabase INSTANCE;
 
-    static RouteRoomDatabase getDatabase(final Context context){
+    public static RouteRoomDatabase getDatabase(final Context context){
         if (INSTANCE == null){
             synchronized (RouteRoomDatabase.class){
                 if (INSTANCE == null) {

@@ -9,6 +9,7 @@ import java.util.List;
 
 import actparks.parksapp.RouteDatabaseFiles.Route;
 import actparks.parksapp.RouteDatabaseFiles.RouteDao;
+import actparks.parksapp.RouteDatabaseFiles.RouteRoomDatabase;
 
 // https://codelabs.developers.google.com/codelabs/android-room-with-a-view/#7
 
@@ -20,7 +21,9 @@ public class WalkRepository {
 
     WalkRepository(Application application){
         WalkRoomDatabase db = WalkRoomDatabase.getDatabase(application);
+        RouteRoomDatabase rdb = RouteRoomDatabase.getDatabase(application);
         mWalkDao = db.walkDao();
+        mRouteDao = rdb.routeDao();
         mAllWalks = mWalkDao.getAllWalks();
     }
 
