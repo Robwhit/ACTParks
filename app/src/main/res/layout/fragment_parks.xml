@@ -21,7 +21,8 @@
         android:id="@+id/parks_sort"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sort" />
+        android:text="Sort"
+        android:background="@drawable/btn"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/parksrecyclerview"
