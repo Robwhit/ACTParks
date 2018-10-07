@@ -4,7 +4,5 @@
     android:id="@+id/walk_tags_list"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:textAppearance="?android:attr/textAppearanceListItemSmall"
     android:gravity="center_vertical"
-    android:textSize="24sp"
-    android:fontFamily="@font/andika"/>
+    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small" />
