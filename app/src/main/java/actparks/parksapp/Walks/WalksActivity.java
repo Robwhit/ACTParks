@@ -48,8 +48,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import actparks.parksapp.R;
-import actparks.parksapp.RouteDatabaseFiles.Route;
-import actparks.parksapp.RouteDatabaseFiles.RouteViewModel;
 import actparks.parksapp.WalkDatabaseFiles.Walk;
 import actparks.parksapp.WalkDatabaseFiles.WalkViewModel;
 
@@ -66,8 +64,6 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
     private LocationLayerPlugin locationPlugin;
     private LocationEngine locationEngine;
     private Location originLocation;
-    private List<Route> mRoutes;
-    RouteViewModel mRouteViewModel;
 
     Boolean mapStarted = false;
     Boolean recievedRoutes = false;
@@ -108,18 +104,8 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
 
 
             // The route
-            mRouteViewModel = ViewModelProviders.of(this).get(RouteViewModel.class);
 
-            mRouteViewModel.getRouteWithId(walk.mId).observe(this, new Observer<List<Route>>() {
-                @Override
-                public void onChanged(@Nullable final List<Route> route) {
-                    if (!recievedRoutes){
-                        mRoutes = route;
-                        recievedRoutes = true;
-                    }
-                }
-
-            });
+            points = walk.routeToArrayList();
 
 
 
@@ -175,14 +161,6 @@ public class  WalksActivity extends AppCompatActivity implements LocationEngineL
                             map = mapboxMap;
                             enableLocationPlugin();
 
-
-                            Log.d("test", Integer.toString(mRoutes.size()));
-                            // Coordinates on map
-                            for (int i = 0; i < mRoutes.size(); i++) {
-                                points.add(new LatLng(Double.parseDouble(mRoutes.get(i).x), Double.parseDouble(mRoutes.get(i).y), Double.parseDouble(mRoutes.get(i).elevation)));
-                                System.out.println(points.get(i));
-
-                            }
 
                             if (points.size() > 0) {
                                 // Create the route line onto map
