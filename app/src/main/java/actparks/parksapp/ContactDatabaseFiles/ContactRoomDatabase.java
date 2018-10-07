@@ -73,10 +73,13 @@ public abstract class ContactRoomDatabase extends RoomDatabase{
                         Gson gson = new Gson();
 
                         // con is the received Contact class
-                        Contact con = gson.fromJson(msg, Contact.class);
-                        // For Test
-                        Log.d("contactRecieve", con.contactName);
-                        mDao.insert(con);
+                        Contact[] conList = gson.fromJson(msg, Contact[].class);
+                        for (int i = 0; i < conList.length; i++){
+                            Contact con = conList[i];
+                            mDao.insert(con);
+
+                        }
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
