@@ -22,7 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Sort"
-        android:background="@drawable/btn"/>
+        android:background="@drawable/btn"
+        android:fontFamily="@font/andika"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/parksrecyclerview"

@@ -30,6 +30,7 @@
             android:layout_weight="5"
             android:text="Information"
             android:background="@drawable/btn"
+            android:fontFamily="@font/andika"
             />
         <Button
             android:layout_width="10dp"
@@ -37,7 +38,8 @@
             android:layout_weight="5"
             android:text="Map"
             android:background="@drawable/btn"
-            android:id="@+id/map_walk_button"/>
+            android:id="@+id/map_walk_button"
+            android:fontFamily="@font/andika"/>
     </LinearLayout>
 
     <FrameLayout

@@ -29,6 +29,7 @@
             android:layout_weight="0.5"
             android:text="filter"
             android:background="@drawable/btn"
+            android:fontFamily="@font/andika"
             />
         <Button
             android:id="@+id/walks_sort_button"
@@ -36,7 +37,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:text="Sort"
-            android:background="@drawable/btn"/>
+            android:background="@drawable/btn"
+            android:fontFamily="@font/andika"/>
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView

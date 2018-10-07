@@ -22,7 +22,8 @@
             android:background="@drawable/recyclelist_cell_style"
             android:textColor="#f4f1eb"
             android:textSize="30sp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:fontFamily="@font/andika"/>
     </LinearLayout>
     <!--android:background="#6a6a2d"-->
 
@@ -39,7 +40,8 @@
             android:background="@drawable/recyclelist_cell_style"
             android:textColor="@android:color/holo_orange_light"
             android:textSize="20sp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:fontFamily="@font/andika"/>
 
         <TextView
             android:layout_width="0dp"
@@ -48,7 +50,8 @@
             android:background="@drawable/recyclelist_cell_style"
             android:textColor="@android:color/holo_blue_light"
             android:textSize="20sp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:fontFamily="@font/andika"/>
 
 
     </LinearLayout>

@@ -41,6 +41,7 @@
                     android:layout_height="match_parent"
                     android:text="Difficulty:"
                     android:textSize="24sp"
+                    android:fontFamily="@font/andika"
                     />
 
                 <RatingBar
@@ -72,7 +73,8 @@
                     android:layout_weight="0.5"
                     android:id="@+id/textWalkDistance"
                     android:textSize="25sp"
-                    android:textAlignment="center"/>
+                    android:textAlignment="center"
+                    android:fontFamily="@font/andika"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -80,7 +82,8 @@
                     android:layout_weight="0.5"
                     android:id="@+id/textWalkTime"
                     android:textSize="25sp"
-                    android:textAlignment="center"/>
+                    android:textAlignment="center"
+                    android:fontFamily="@font/andika"/>
 
             </LinearLayout>
 
@@ -102,7 +105,8 @@
                     tools:layout_editor_absoluteX="73dp"
                     tools:layout_editor_absoluteY="0dp"
                     android:gravity="left"
-                    android:textSize="25sp" />
+                    android:textSize="25sp"
+                    android:fontFamily="@font/andika"/>
 
                 <TextView
                     android:id="@+id/walkActivityDescriptionText"
@@ -111,7 +115,8 @@
                     tools:layout_editor_absoluteX="73dp"
                     tools:layout_editor_absoluteY="0dp"
                     android:gravity="left"
-                    android:textSize="25sp" />
+                    android:textSize="25sp"
+                    android:fontFamily="@font/andika"/>
             </LinearLayout>>
 
         </LinearLayout>

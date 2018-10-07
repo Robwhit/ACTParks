@@ -21,7 +21,8 @@
             android:background="@drawable/recyclelist_cell_style"
             android:textColor="#f4f1eb"
             android:textSize="25dp"
-            android:gravity="left"/>
+            android:gravity="left"
+            android:fontFamily="@font/andika"/>
 
         <TextView
             android:id="@+id/contacts_recycler_number_view"
@@ -30,7 +31,8 @@
             android:background="@drawable/recyclelist_cell_style"
             android:textColor="#f4f1eb"
             android:textSize="25dp"
-            android:gravity="left"/>
+            android:gravity="left"
+            android:fontFamily="@font/andika"/>
     </LinearLayout>
 
 </LinearLayout>

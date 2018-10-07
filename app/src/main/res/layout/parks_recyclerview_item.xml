@@ -17,7 +17,8 @@
         android:layout_height="wrap_content"
         android:textSize="30sp"
         android:background="@drawable/recyclelist_cell_style"
-        android:textColor="#f4f1eb"/>
+        android:textColor="#f4f1eb"
+        android:fontFamily="@font/andika"/>
     </LinearLayout>
 </LinearLayout>
 
