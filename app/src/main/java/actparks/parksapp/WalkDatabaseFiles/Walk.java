@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class Walk implements Parcelable{
 
     public Walk(@NonNull int id, String name, String tags, int difficulty,
-                double distance, String lengthTime, String description, String route) {
+                double distance, String lengthTime, String description, String route, int park) {
         this.mId = id;
         this.mName = name;
         this.tags = tags;
@@ -28,6 +28,7 @@ public class Walk implements Parcelable{
         this.mLengthTime = lengthTime;
         this.mDescription = description;
         this.mRoute = route;
+        this.mPark = park;
     }
 
     public Walk(Parcel in){
@@ -73,6 +74,9 @@ public class Walk implements Parcelable{
     @ColumnInfo(name = "route")
     public String mRoute;
 
+    @ColumnInfo(name = "park")
+    public int mPark;
+
 
     @Override
     public int describeContents() {
@@ -89,6 +93,7 @@ public class Walk implements Parcelable{
         dest.writeString(mLengthTime);
         dest.writeString( mDescription );
         dest.writeString(mRoute);
+        dest.writeInt(mPark);
     }
 
     public void readFromParcel(Parcel in){
@@ -100,6 +105,7 @@ public class Walk implements Parcelable{
         mLengthTime = in.readString();
         mDescription = in.readString();
         mRoute = in.readString();
+        mPark = in.readInt();
     }
 
     public ArrayList<LatLng> routeToArrayList(){
