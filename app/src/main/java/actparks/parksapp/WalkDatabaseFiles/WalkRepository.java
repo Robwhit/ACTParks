@@ -5,25 +5,22 @@ import android.arch.lifecycle.LiveData;
 import android.location.Location;
 import android.os.AsyncTask;
 
+import com.mapbox.mapboxsdk.geometry.LatLng;
+
+import java.util.ArrayList;
 import java.util.List;
 
-import actparks.parksapp.RouteDatabaseFiles.Route;
-import actparks.parksapp.RouteDatabaseFiles.RouteDao;
-import actparks.parksapp.RouteDatabaseFiles.RouteRoomDatabase;
 
 // https://codelabs.developers.google.com/codelabs/android-room-with-a-view/#7
 
 public class WalkRepository {
 
     private WalkDao mWalkDao;
-    private RouteDao mRouteDao;
     private LiveData<List<Walk>> mAllWalks;
 
     WalkRepository(Application application){
         WalkRoomDatabase db = WalkRoomDatabase.getDatabase(application);
-        RouteRoomDatabase rdb = RouteRoomDatabase.getDatabase(application);
         mWalkDao = db.walkDao();
-        mRouteDao = rdb.routeDao();
         mAllWalks = mWalkDao.getAllWalks();
     }
 
@@ -47,9 +44,10 @@ public class WalkRepository {
         for (Walk w: ws){
             System.out.println("walk id is: "+w.mId);
             try {
-                Route mRoute = mRouteDao.getStartPos( w.mId );
+                ArrayList<LatLng> points = w.routeToArrayList();
+                LatLng point = points.get(0);
 
-                System.out.println("route x and y: "+mRoute.x + " : " + mRoute.y);
+                System.out.println("route x and y: "+point.getLatitude() + " : " + point.getLongitude());
 
             }
             catch(Exception e) {
