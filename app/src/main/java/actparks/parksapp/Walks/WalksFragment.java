@@ -35,7 +35,6 @@ import java.util.List;
 
 import actparks.parksapp.MainActivity;
 import actparks.parksapp.R;
-import actparks.parksapp.RouteDatabaseFiles.Route;
 import actparks.parksapp.WalkDatabaseFiles.Walk;
 import actparks.parksapp.WalkDatabaseFiles.WalkClickListener;
 import actparks.parksapp.WalkDatabaseFiles.WalkListAdapter;

@@ -7,6 +7,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
+import com.mapbox.mapboxsdk.geometry.LatLng;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
 
 // https://codelabs.developers.google.com/codelabs/android-room-with-a-view/#3
 
@@ -14,7 +19,7 @@ import android.support.annotation.NonNull;
 public class Walk implements Parcelable{
 
     public Walk(@NonNull int id, String name, String tags, int difficulty,
-                double distance, String lengthTime, String description) {
+                double distance, String lengthTime, String description, String route) {
         this.mId = id;
         this.mName = name;
         this.tags = tags;
@@ -22,6 +27,7 @@ public class Walk implements Parcelable{
         this.mDistance = distance;
         this.mLengthTime = lengthTime;
         this.mDescription = description;
+        this.mRoute = route;
     }
 
     public Walk(Parcel in){
@@ -64,6 +70,9 @@ public class Walk implements Parcelable{
     @ColumnInfo(name = "coordinate")
     public String mCoordinate;
 
+    @ColumnInfo(name = "route")
+    public String mRoute;
+
 
     @Override
     public int describeContents() {
@@ -79,6 +88,7 @@ public class Walk implements Parcelable{
         dest.writeDouble(mDistance);
         dest.writeString(mLengthTime);
         dest.writeString( mDescription );
+        dest.writeString(mRoute);
     }
 
     public void readFromParcel(Parcel in){
@@ -89,5 +99,25 @@ public class Walk implements Parcelable{
         mDistance = in.readDouble();
         mLengthTime = in.readString();
         mDescription = in.readString();
+        mRoute = in.readString();
+    }
+
+    public ArrayList<LatLng> routeToArrayList(){
+
+        ArrayList<LatLng> list = new ArrayList<>();
+
+
+            String[] split_list = mRoute.split("__,__");
+
+            for (int i = 0; i < split_list.length; i++) {
+                String[] sub_str = split_list[i].split(",");
+                if (sub_str.length == 3) {
+                    LatLng latLng = new LatLng(Double.parseDouble(sub_str[0]), Double.parseDouble(sub_str[1]), Double.parseDouble(sub_str[2]));
+                    list.add(latLng);
+                }
+            }
+
+        return list;
+
     }
 }
