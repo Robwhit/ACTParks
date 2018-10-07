@@ -7,6 +7,15 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.util.Log;
+
+import com.google.gson.Gson;
+
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.net.Socket;
+
+import actparks.parksapp.ContactDatabaseFiles.Contact;
 
 // https://codelabs.developers.google.com/codelabs/android-room-with-a-view/#6
 
@@ -63,6 +72,28 @@ public abstract class WalkRoomDatabase extends RoomDatabase{
             id = new Walk(2, "Harrys Walk","Short Walk__,__Easy Difficulty",
                     2, 17.75,"0:42", "this is Harrys walk","");
             mDao.insert(id);
+
+            new Thread(new Runnable(){
+                public void run(){
+                    //open socket
+                    try {
+                        String host = "35.197.184.151";
+                        int port = 10003;
+                        Socket sock = new Socket(host, port);
+                        DataInputStream in = new DataInputStream(sock.getInputStream());
+                        String msg = in.readUTF();
+                        Gson gson = new Gson();
+
+                        // con is the received Contact class
+                        Walk con = gson.fromJson(msg, Walk.class);
+                        // For Test
+                        Log.d("walkRecieve", con.mName);
+                        mDao.insert(con);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
             return null;
         }
     }
