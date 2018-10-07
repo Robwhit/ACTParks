@@ -18,8 +18,8 @@
             android:id="@+id/contacts_recycler_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#6a6a2d"
-            android:textColor="#ffffff"
+            android:background="@drawable/recyclelist_cell_style"
+            android:textColor="#f4f1eb"
             android:textSize="25dp"
             android:gravity="left"/>
 
@@ -27,8 +27,8 @@
             android:id="@+id/contacts_recycler_number_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#6a6a2d"
-            android:textColor="#ffffff"
+            android:background="@drawable/recyclelist_cell_style"
+            android:textColor="#f4f1eb"
             android:textSize="25dp"
             android:gravity="left"/>
     </LinearLayout>

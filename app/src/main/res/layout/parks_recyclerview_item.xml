@@ -16,8 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30sp"
-        android:background="#6a6a2d"
-        android:textColor="#ffffff"/>
+        android:background="@drawable/recyclelist_cell_style"
+        android:textColor="#f4f1eb"/>
     </LinearLayout>
 </LinearLayout>
 
