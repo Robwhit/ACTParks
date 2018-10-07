@@ -27,13 +27,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="Info"
+            android:text="Information"
+            android:background="@drawable/btn"
             />
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:text="Map"
+            android:background="@drawable/btn"
             android:id="@+id/map_walk_button"/>
     </LinearLayout>
 
