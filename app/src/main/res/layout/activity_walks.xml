@@ -25,16 +25,16 @@
 
         <Button
             android:id="@+id/info_walk_button"
-            android:layout_width="0dp"
+            android:layout_width="10dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
+            android:layout_weight="5"
             android:text="Information"
             android:background="@drawable/btn"
             />
         <Button
-            android:layout_width="0dp"
+            android:layout_width="10dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
+            android:layout_weight="5"
             android:text="Map"
             android:background="@drawable/btn"
             android:id="@+id/map_walk_button"/>
