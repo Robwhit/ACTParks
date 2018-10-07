@@ -13,6 +13,10 @@
             android:id="@+id/s_two"
             android:title="sort by distance"/>
 
+        <item
+            android:id="@+id/s_three"
+            android:title="sort by distance from my location"/>
+
     </group>
 
 </menu>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,7 +9,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
         <TabHost
             android:id="@+id/tabHostParks"
             android:layout_width="match_parent"
@@ -66,10 +68,22 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
-                        <TextView
+                        <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="70">
+                        <!-- MapView currently shows all of ACT-->
+                        <com.mapbox.mapboxsdk.maps.MapView
+                            android:id="@+id/mapParkView"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="This is tab 2" />
+                            mapbox:mapbox_cameraTargetLat="-35.27454"
+                            mapbox:mapbox_cameraTargetLng="149.09874"
+                            mapbox:mapbox_styleUrl="@string/mapbox_style_outdoors"
+                            mapbox:mapbox_uiLogo="false"
+                            mapbox:mapbox_uiAttribution="false"
+                            mapbox:mapbox_cameraZoom="10"/>
+                        </LinearLayout>
 
                         <Button
                             android:id="@+id/bushwalks_button_id"
@@ -77,6 +91,7 @@
                             android:layout_width="wrap_content"
                             android:layout_gravity="center_vertical|center_horizontal"
                             android:text="Bushwalks" />
+
 
                     </LinearLayout>
                 </FrameLayout>

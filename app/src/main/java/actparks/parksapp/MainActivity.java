@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity
 
     private int ACCESS_FINE_LOCATION = 1;
 
-    private LocationManager locationManager;
+    public static LocationManager locationManager;
     private LocationListener locationListener;
 
     public static double latitude;
