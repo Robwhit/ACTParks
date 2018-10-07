@@ -85,10 +85,12 @@ public abstract class WalkRoomDatabase extends RoomDatabase{
                         Gson gson = new Gson();
 
                         // con is the received Contact class
-                        Walk con = gson.fromJson(msg, Walk.class);
+                        Walk[] walkList = gson.fromJson(msg, Walk[].class);
+
+                        for(int i = 0; i < walkList.length; i++){
+                            mDao.insert(walkList[i]);
+                        }
                         // For Test
-                        Log.d("walkRecieve", con.mName);
-                        mDao.insert(con);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
