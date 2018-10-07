@@ -39,15 +39,45 @@ public class WalkRepository {
         mAllWalks = mWalkDao.sortWalkDistance();
         return  mAllWalks; }
 
+
+//        class WalkDistacnePair implements Comparable<WalkDistacnePair>{
+//            Walk walk;
+//            double distance;
+//            WalkDistacnePair(Walk walk, double distance){
+//                this.walk = walk;
+//                this.distance = distance;
+//            }
+//
+//            @Override
+//            public int compareTo(@NonNull WalkDistacnePair walkDistacnePair) {
+//                double i = this.distance - walkDistacnePair.distance;
+//                return (int) i;
+//
+//            }
+//        }
+
     LiveData<List<Walk>> sortByDistanceFromMe(Location currentLocation){
         List<Walk> ws = mAllWalks.getValue();
+//        ArrayList<WalkDistacnePair> wdList = new ArrayList();
         for (Walk w: ws){
             System.out.println("walk id is: "+w.mId);
             try {
                 ArrayList<LatLng> points = w.routeToArrayList();
                 LatLng point = points.get(0);
+                double Lan = Math.abs(point.getLatitude());
+                double Lon = Math.abs(point.getLongitude());
+                double current_Lan = Math.abs(currentLocation.getLatitude());
+                double current_Lon = Math.abs(currentLocation.getLongitude());
 
-                System.out.println("route x and y: "+point.getLatitude() + " : " + point.getLongitude());
+                //calculate distance between w and currentLocation (we don't need to sqrt the distance)
+                double  distance = ((Lan-current_Lan)*(Lan-current_Lan)+(Lon-current_Lon)*(Lon-current_Lon));
+
+//                WalkDistacnePair wd = new WalkDistacnePair(w, distance);
+//                wdList.add( wd );
+//                System.out.println("-----");
+//                System.out.println(wdList.get( 0 ).walk.mName.toString()+wdList.get( 0 ).distance);
+                System.out.println("route x and y: "+Lan + " : " + Lon);
+                System.out.println("currentLocation x and y: "+current_Lan + " : " + current_Lon);
 
             }
             catch(Exception e) {
@@ -55,6 +85,19 @@ public class WalkRepository {
             }
 
         }
+
+        //sort by currentLocation, x, y distance
+//        Collections.sort( wdList );
+
+//        List<Walk> walkList = new ArrayList<>(  );
+//        for (WalkDistacnePair wdp : wdList){
+//            walkList.add( wdp.walk );
+//            System.out.println("111000111----------");
+//            System.out.println(wdp.walk.mName + wdp.distance);
+//        }
+//        TODO: transfer walkList to LiveData then return
+//        LiveData<List<Walk>> result = (LiveData<List<Walk>>) walkList;
+
         return  mAllWalks;
     }
 
