@@ -9,6 +9,8 @@ import android.support.annotation.NonNull;
 import java.security.PublicKey;
 import java.util.List;
 
+import actparks.parksapp.RouteDatabaseFiles.Route;
+
 public class WalkViewModel extends AndroidViewModel{
 
     private WalkRepository mRepository;
@@ -33,8 +35,8 @@ public class WalkViewModel extends AndroidViewModel{
         return mAllWalks;
     }
 
-    public LiveData<List<Walk>> sortByDistanceFromMe(Location currentLocation){
-        mAllWalks = mRepository.sortByDistanceFromMe(currentLocation);
+    public LiveData<List<Walk>> sortByDistanceFromMe(Location currentLocation, Route route){
+        mAllWalks = mRepository.sortByDistanceFromMe(currentLocation, route);
         return mAllWalks;
     }
 
