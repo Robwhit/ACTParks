@@ -270,8 +270,7 @@ public class WalksFragment extends Fragment {
                             } );
 
                         } else if (item.getTitle().equals( "sort by distance from my location" )) {
-//                            currentLocation =
-//                            System.out.println("");
+                            //get current GPS
                             String locationProvider;
                             locationProvider = LocationManager.GPS_PROVIDER;
                             currentLocation = MainActivity.locationManager.getLastKnownLocation( locationProvider );
