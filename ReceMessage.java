@@ -14,11 +14,13 @@ public class ReceMessage extends Thread {
         this.port = port;
     }
 
+    // run it as a thread
     public void run(){
 
         while(true) {
             ServerSocket sSock;
             try {
+                // standard method to open a TCP link
                 sSock = new ServerSocket(port);
 
                 System.out.println("open at port:" + sSock.getLocalPort() + " to receive info");
