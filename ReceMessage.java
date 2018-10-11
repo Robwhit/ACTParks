@@ -26,17 +26,23 @@ public class ReceMessage extends Thread {
                 System.out.println("connect from:" + sock.getRemoteSocketAddress());
                 DataInputStream in = new DataInputStream(sock.getInputStream());
                 String tmp;
+                
+                // receive contact info
                 if (port == 10004) {
                     tmp = in.readUTF();
                     SendInfoServer.setcon(tmp);
                     sSock.close();
                     sock.close();
-                } else if (port == 10005) {
+                } 
+                // receive walk info
+                else if (port == 10005) {
                     tmp = in.readUTF();
                     SendInfoServer.setwalk(tmp);
                     sSock.close();
                     sock.close();
-                } else if (port == 10501) {
+                } 
+                // receive test info
+                else if (port == 10501) {
                     System.out.println("Receive new test: \n");
                     tmp = in.readUTF();
                     SendInfoServer.settest(tmp);
