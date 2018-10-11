@@ -19,6 +19,7 @@ public class ServerThread extends Thread {
 
     }
 
+    // Run as a thread
     public void run(){
 
         while(true) {
@@ -26,6 +27,7 @@ public class ServerThread extends Thread {
             try {
                 sSock = new ServerSocket(port);
 
+                // receive info from different port
                 System.out.println("open at port:" + sSock.getLocalPort());
                 Socket sock = sSock.accept();
                 System.out.println("connect from:" + sock.getRemoteSocketAddress());
