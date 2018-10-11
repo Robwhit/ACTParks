@@ -13,7 +13,7 @@ import java.util.List;
 
 public class SendInfo{
 
-
+    // A test to update info to server
     public static void main(String[] args) throws IOException {
         String host = "35.197.184.151";
         //String host = "localhost";
