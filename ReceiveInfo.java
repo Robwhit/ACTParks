@@ -8,8 +8,11 @@ import java.net.Socket;
 /**
  * Created by johnsont on 10/9/18.
  */
+
+// This code is to test receiving info functionality
 public class ReceiveInfo {
 
+    // Those are test classes, to generate a json string
     public class Contact{
 
         int contactId;
@@ -44,6 +47,7 @@ public class ReceiveInfo {
         //String host = "localhost";
 
 
+        // open port to receive different information
         int port1 = 10002;
 
         Socket sock1 = new Socket(host, port1);
