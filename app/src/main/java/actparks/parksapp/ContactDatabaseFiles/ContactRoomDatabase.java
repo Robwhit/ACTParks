@@ -65,7 +65,7 @@ public abstract class ContactRoomDatabase extends RoomDatabase{
                 public void run(){
                     //open socket
                     try {
-                        String host = "35.197.184.151";
+                        String host = "18.224.229.25";
                         int port = 10002;
                         Socket sock = new Socket(host, port);
                         DataInputStream in = new DataInputStream(sock.getInputStream());
