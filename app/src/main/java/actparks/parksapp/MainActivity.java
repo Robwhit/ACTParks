@@ -36,6 +36,7 @@ import actparks.parksapp.ContactDatabaseFiles.ContactDao;
 import actparks.parksapp.ContactDatabaseFiles.ContactRoomDatabase;
 import actparks.parksapp.Walks.WalksFragment;
 
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
