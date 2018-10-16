@@ -36,9 +36,13 @@ import actparks.parksapp.ContactDatabaseFiles.ContactDao;
 import actparks.parksapp.ContactDatabaseFiles.ContactRoomDatabase;
 import actparks.parksapp.Walks.WalksFragment;
 
+// This is the Home activity which is opened when the app first opens
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+
+    // GPS Permission variables
 
     private int ACCESS_FINE_LOCATION = 1;
 
@@ -54,6 +58,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Creates the nav bar at the top of each activity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

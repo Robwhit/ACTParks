@@ -5,7 +5,7 @@
     <string name="nav_header_title">ACT Parks and Conservation</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-    
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- TODO: Please Replace the mapbox string with a new one! -->
